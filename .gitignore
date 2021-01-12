@@ -1,0 +1,32 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+
+# custom ignoring patterns
+*_ignored*
+*_ig*
+*_old.py
+
+
+# python
+
+*.ipynb_checkpoints*
+*__pycache__/
+
+
+
+
