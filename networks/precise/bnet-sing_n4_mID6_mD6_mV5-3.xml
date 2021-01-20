@@ -5,7 +5,7 @@
 	Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
 	Produced by JavaBayes (http://www.cs.cmu.edu/~javabayes/
 	Number of nodes:4
-	Output created Thu Jan 14 12:47:34 CET 2021
+	Output created Wed Jan 20 11:17:10 CET 2021
 -->
 
 
@@ -19,6 +19,7 @@
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
     <OUTCOME>state2</OUTCOME>
+    <OUTCOME>state3</OUTCOME>
     <PROPERTY>position = (45, 30)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
@@ -27,6 +28,7 @@
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
     <OUTCOME>state2</OUTCOME>
+    <OUTCOME>state3</OUTCOME>
     <PROPERTY>position = (15, 150)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
@@ -34,7 +36,6 @@
     <NAME>node2</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <OUTCOME>state2</OUTCOME>
     <PROPERTY>position = (135, 164)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
@@ -44,28 +45,27 @@
     <OUTCOME>state1</OUTCOME>
     <OUTCOME>state2</OUTCOME>
     <OUTCOME>state3</OUTCOME>
-    <OUTCOME>state4</OUTCOME>
     <PROPERTY>position = (255, 150)</PROPERTY>
 </VARIABLE>
 <!-- Probability Distributions -->
  <DEFINITION>
       <FOR>node0</FOR>
-     <TABLE>0.0192 0.5803 0.4005 </TABLE>
+     <TABLE>0.2072 0.0166 0.7702 0.006 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node1</FOR>
       <GIVEN>node0</GIVEN>
-     <TABLE>0.1118 0.0394 0.8488 0.8597 0.1108 0.0295 0.0982 0.4885 0.4133 </TABLE>
+     <TABLE>0.1816 0.1774 0.4624 0.1786 0.3281 0.2457 0.0243 0.4019 0.1097 0.1508 0.204 0.5355 0.3342 0.344 0.0714 0.2504 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node2</FOR>
       <GIVEN>node1</GIVEN>
-     <TABLE>0.4005 0.4391 0.1604 0.5316 0.4055 0.0629 0.3098 0.4369 0.2533 </TABLE>
+     <TABLE>0.7972 0.2028 0.8924 0.1076 0.2939 0.7061 0.3632 0.6368 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node3</FOR>
       <GIVEN>node2</GIVEN>
-     <TABLE>0.0551 0.1924 0.2191 0.3715 0.1619 0.0084 0.2819 0.1322 0.5579 0.0196 0.2998 0.0114 0.3142 0.37 0.0046 </TABLE>
+     <TABLE>0.1224 0.6805 0.087 0.1101 0.0249 0.0562 0.1458 0.7731 </TABLE>
  </DEFINITION>
 </NETWORK>
 </BIF>

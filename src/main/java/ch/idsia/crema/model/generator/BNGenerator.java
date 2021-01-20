@@ -67,6 +67,7 @@ import java.util.*;
 //import embayes.infer.*;
 //import embayes.learn.*;
 
+import ch.idsia.crema.utility.RandomUtil;
 import org.apache.commons.math3.random.MersenneTwister;
 
 //to generate from xml file
@@ -87,12 +88,13 @@ public class BNGenerator {
 	private int[][] parentMatrix;
 	private int[][] sonMatrix;
 	private int[] nStates;
-	private Random random = new Random();
+	private Random random = RandomUtil.getRandom();
 	int seed = (int) (100000 * random.nextFloat());
 	private MersenneTwister rand = new MersenneTwister(seed + 1);
 	private MersenneTwister randSampleArc = new MersenneTwister(seed + 2);
 	private MersenneTwister randPolytree = new MersenneTwister(seed + 3);
 	private MersenneTwister randMulti = new MersenneTwister(seed + 4);
+
 	DFGenerator df = new DFGenerator();
 	int numberStates = 15000; // for testing Uniformity
 	int[] distribution = new int[numberStates]; // for testing Uniformity
@@ -102,16 +104,10 @@ public class BNGenerator {
 	double expectedFrequency = 0, quiSquare = 0; // for uniformity test
 	boolean fixed_nValue = false;
 	int nPointProb = 3; // default number of points used to generate credal sets
-
-	//EmBayes ejb = new EmBayes(); FIXME commentato da Alessandro
-	//DataFactory dataFactory; FIXME commentato da Alessandro
-	//InferFactory inferFactory; FIXME commentato da Alessandro
 	int iwOfEachGraphType[] = new int[numberStates]; // IW
 	int iwDistribution[] = new int[100]; // IW
-
 	String lin = "bnLink";
 	StringTokenizer st = new StringTokenizer(lin);
-
 	float lowerP = 0; // default interval (added on March 2006)
 	float upperP = 1; // default interval (added on March 2006)
 

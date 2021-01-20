@@ -5,7 +5,7 @@
 	Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
 	Produced by JavaBayes (http://www.cs.cmu.edu/~javabayes/
 	Number of nodes:4
-	Output created Thu Jan 14 12:47:34 CET 2021
+	Output created Wed Jan 20 11:17:10 CET 2021
 -->
 
 
@@ -18,7 +18,7 @@
     <NAME>node0</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (44, 270)</PROPERTY>
+    <PROPERTY>position = (45, 30)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
@@ -32,34 +32,35 @@
     <NAME>node2</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (45, 30)</PROPERTY>
+    <OUTCOME>state2</OUTCOME>
+    <PROPERTY>position = (135, 164)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
     <NAME>node3</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (165, 44)</PROPERTY>
+    <PROPERTY>position = (255, 150)</PROPERTY>
 </VARIABLE>
 <!-- Probability Distributions -->
  <DEFINITION>
       <FOR>node0</FOR>
-      <GIVEN>node2</GIVEN>
-      <GIVEN>node3</GIVEN>
-     <TABLE>0.1366 0.8634 0.9885 0.0115 0.9663 0.0337 0.7622 0.2378 </TABLE>
+     <TABLE>0.0436 0.9564 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node1</FOR>
-      <GIVEN>node3</GIVEN>
-     <TABLE>0.9067 0.0933 0.5105 0.4895 </TABLE>
+      <GIVEN>node0</GIVEN>
+     <TABLE>0.5779 0.4221 0.0662 0.9338 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node2</FOR>
-     <TABLE>0.7509 0.2491 </TABLE>
+      <GIVEN>node3</GIVEN>
+     <TABLE>0.4795 0.2016 0.3189 0.5241 0.3191 0.1568 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node3</FOR>
-     <TABLE>0.6259 0.3741 </TABLE>
+      <GIVEN>node0</GIVEN>
+     <TABLE>0.6955 0.3045 0.5901 0.4099 </TABLE>
  </DEFINITION>
 </NETWORK>
 </BIF>

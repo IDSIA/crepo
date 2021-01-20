@@ -5,7 +5,7 @@
 	Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
 	Produced by JavaBayes (http://www.cs.cmu.edu/~javabayes/
 	Number of nodes:4
-	Output created Thu Jan 14 12:47:34 CET 2021
+	Output created Wed Jan 20 11:17:10 CET 2021
 -->
 
 
@@ -19,7 +19,7 @@
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
     <OUTCOME>state2</OUTCOME>
-    <PROPERTY>position = (15, 150)</PROPERTY>
+    <PROPERTY>position = (45, 30)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
@@ -34,34 +34,35 @@
     <NAME>node2</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (45, 30)</PROPERTY>
+    <OUTCOME>state2</OUTCOME>
+    <PROPERTY>position = (165, 44)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
     <NAME>node3</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (165, 44)</PROPERTY>
+    <PROPERTY>position = (15, 150)</PROPERTY>
 </VARIABLE>
 <!-- Probability Distributions -->
  <DEFINITION>
       <FOR>node0</FOR>
-      <GIVEN>node2</GIVEN>
-     <TABLE>0.0314 0.2471 0.7215 0.0591 0.0378 0.9031 </TABLE>
+     <TABLE>0.4087 0.4418 0.1495 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node1</FOR>
       <GIVEN>node0</GIVEN>
-      <GIVEN>node3</GIVEN>
-     <TABLE>0.7578 0.0873 0.1549 0.1921 0.792 0.0159 0.064 0.3547 0.5813 0.5805 0.2337 0.1858 0.3956 0.2262 0.3782 0.2268 0.5307 0.2425 </TABLE>
+      <GIVEN>node2</GIVEN>
+     <TABLE>0.0809 0.382 0.5371 0.3983 0.5223 0.0794 0.7493 0.0057 0.245 0.4099 0.2762 0.3139 0.5414 0.4584 2.0E-4 0.4006 0.4201 0.1793 0.4428 0.0019 0.5553 0.2347 0.0157 0.7496 0.1936 0.0064 0.8 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node2</FOR>
-     <TABLE>0.187 0.813 </TABLE>
+     <TABLE>9.0E-4 0.6762 0.3229 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node3</FOR>
-     <TABLE>0.3681 0.6319 </TABLE>
+      <GIVEN>node1</GIVEN>
+     <TABLE>0.4373 0.5627 0.1719 0.8281 0.4325 0.5675 </TABLE>
  </DEFINITION>
 </NETWORK>
 </BIF>

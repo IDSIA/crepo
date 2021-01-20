@@ -5,7 +5,7 @@
 	Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
 	Produced by JavaBayes (http://www.cs.cmu.edu/~javabayes/
 	Number of nodes:10
-	Output created Thu Jan 14 12:47:35 CET 2021
+	Output created Wed Jan 20 11:17:11 CET 2021
 -->
 
 
@@ -33,14 +33,13 @@
     <NAME>node2</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (135, 164)</PROPERTY>
+    <PROPERTY>position = (165, 44)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
     <NAME>node3</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <OUTCOME>state2</OUTCOME>
     <PROPERTY>position = (44, 270)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
@@ -55,13 +54,14 @@
     <NAME>node5</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (284, 270)</PROPERTY>
+    <PROPERTY>position = (135, 164)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
     <NAME>node6</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
     <PROPERTY>position = (255, 150)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
@@ -69,72 +69,71 @@
     <NAME>node7</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <OUTCOME>state2</OUTCOME>
-    <PROPERTY>position = (165, 44)</PROPERTY>
+    <PROPERTY>position = (285, 30)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
     <NAME>node8</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (285, 30)</PROPERTY>
+    <PROPERTY>position = (375, 135)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
     <NAME>node9</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (405, 15)</PROPERTY>
+    <PROPERTY>position = (495, 149)</PROPERTY>
 </VARIABLE>
 <!-- Probability Distributions -->
  <DEFINITION>
       <FOR>node0</FOR>
-     <TABLE>0.8763 0.1237 </TABLE>
+     <TABLE>0.898 0.102 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node1</FOR>
-      <GIVEN>node8</GIVEN>
-     <TABLE>0.4408 0.3918 0.1674 0.23 0.3236 0.4464 </TABLE>
+      <GIVEN>node7</GIVEN>
+     <TABLE>0.3685 0.2812 0.3503 0.434 0.1002 0.4658 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node2</FOR>
-      <GIVEN>node8</GIVEN>
-     <TABLE>0.8059 0.1941 0.0114 0.9886 </TABLE>
+     <TABLE>0.0994 0.9006 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node3</FOR>
       <GIVEN>node9</GIVEN>
       <GIVEN>node0</GIVEN>
-     <TABLE>0.0355 0.9126 0.0519 0.3789 0.5254 0.0957 0.1493 0.1275 0.7232 0.3218 0.6359 0.0423 </TABLE>
+     <TABLE>0.0756 0.9244 0.6073 0.3927 0.0845 0.9155 0.2103 0.7897 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node4</FOR>
-      <GIVEN>node7</GIVEN>
-      <GIVEN>node0</GIVEN>
-     <TABLE>0.6821 0.3179 0.5095 0.4905 0.3593 0.6407 0.4372 0.5628 0.3138 0.6862 0.6235 0.3765 </TABLE>
+      <GIVEN>node5</GIVEN>
+      <GIVEN>node2</GIVEN>
+     <TABLE>0.1215 0.8785 0.8888 0.1112 0.7103 0.2897 0.2568 0.7432 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node5</FOR>
       <GIVEN>node7</GIVEN>
-      <GIVEN>node1</GIVEN>
-     <TABLE>0.4017 0.5983 0.3328 0.6672 0.4622 0.5378 0.9029 0.0971 0.7092 0.2908 0.8077 0.1923 0.0548 0.9452 0.2297 0.7703 0.7748 0.2252 </TABLE>
+     <TABLE>0.0109 0.9891 0.6671 0.3329 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node6</FOR>
-      <GIVEN>node5</GIVEN>
-     <TABLE>0.948 0.052 0.0168 0.9832 </TABLE>
+      <GIVEN>node7</GIVEN>
+     <TABLE>0.1137 0.5504 0.3359 0.0494 0.028 0.9226 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node7</FOR>
-     <TABLE>0.2855 0.5002 0.2143 </TABLE>
+     <TABLE>0.8455 0.1545 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node8</FOR>
-     <TABLE>0.1656 0.8344 </TABLE>
+      <GIVEN>node0</GIVEN>
+     <TABLE>0.2143 0.7857 0.8158 0.1842 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node9</FOR>
-     <TABLE>0.7976 0.2024 </TABLE>
+      <GIVEN>node5</GIVEN>
+     <TABLE>0.1371 0.8629 0.2692 0.7308 </TABLE>
  </DEFINITION>
 </NETWORK>
 </BIF>

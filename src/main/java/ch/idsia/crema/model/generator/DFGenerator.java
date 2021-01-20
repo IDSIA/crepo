@@ -2,13 +2,14 @@ package ch.idsia.crema.model.generator;
 
 import java.util.Random;
 
+import ch.idsia.crema.utility.RandomUtil;
 import org.apache.commons.math3.distribution.GammaDistribution;
 import org.apache.commons.math3.random.MersenneTwister;
 //import MersenneTwister;
 
 public class DFGenerator {
 
-private Random random = new Random();
+private Random random = RandomUtil.getRandom();
 int seed= (int)(100000*random.nextFloat());  
 protected MersenneTwister engine = new MersenneTwister(seed+5);
 

@@ -5,7 +5,7 @@
 	Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
 	Produced by JavaBayes (http://www.cs.cmu.edu/~javabayes/
 	Number of nodes:4
-	Output created Thu Jan 14 12:47:34 CET 2021
+	Output created Wed Jan 20 11:17:10 CET 2021
 -->
 
 
@@ -18,7 +18,8 @@
     <NAME>node0</NAME>
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
-    <PROPERTY>position = (44, 270)</PROPERTY>
+    <OUTCOME>state2</OUTCOME>
+    <PROPERTY>position = (45, 30)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
@@ -26,9 +27,7 @@
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
     <OUTCOME>state2</OUTCOME>
-    <OUTCOME>state3</OUTCOME>
-    <OUTCOME>state4</OUTCOME>
-    <PROPERTY>position = (45, 30)</PROPERTY>
+    <PROPERTY>position = (15, 150)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
@@ -36,8 +35,7 @@
     <OUTCOME>state0</OUTCOME>
     <OUTCOME>state1</OUTCOME>
     <OUTCOME>state2</OUTCOME>
-    <OUTCOME>state3</OUTCOME>
-    <PROPERTY>position = (15, 150)</PROPERTY>
+    <PROPERTY>position = (135, 164)</PROPERTY>
 </VARIABLE>
 <!-- Variables -->
 <VARIABLE TYPE="nature">
@@ -46,27 +44,28 @@
     <OUTCOME>state1</OUTCOME>
     <OUTCOME>state2</OUTCOME>
     <OUTCOME>state3</OUTCOME>
-    <PROPERTY>position = (165, 44)</PROPERTY>
+    <OUTCOME>state4</OUTCOME>
+    <PROPERTY>position = (255, 150)</PROPERTY>
 </VARIABLE>
 <!-- Probability Distributions -->
  <DEFINITION>
       <FOR>node0</FOR>
-      <GIVEN>node2</GIVEN>
-      <GIVEN>node3</GIVEN>
-     <TABLE>0.159 0.841 0.5943 0.4057 0.2679 0.7321 0.7017 0.2983 0.9038 0.0962 0.7954 0.2046 0.5273 0.4727 0.1234 0.8766 0.1237 0.8763 0.7358 0.2642 0.8959 0.1041 0.992 0.008 0.4335 0.5665 0.9359 0.0641 0.3865 0.6135 0.8092 0.1908 </TABLE>
+     <TABLE>0.0543 0.0142 0.9315 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node1</FOR>
-     <TABLE>0.2472 0.0536 0.0523 0.1512 0.4957 </TABLE>
+      <GIVEN>node2</GIVEN>
+     <TABLE>0.276 0.3769 0.3471 0.7181 0.2642 0.0177 0.1397 0.3829 0.4774 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node2</FOR>
-      <GIVEN>node1</GIVEN>
-     <TABLE>0.365 0.1017 0.0401 0.4932 0.5016 0.0451 0.1793 0.274 0.52 0.1839 0.2479 0.0482 0.0892 0.2096 0.2375 0.4637 0.1337 0.6783 0.1656 0.0224 </TABLE>
+      <GIVEN>node0</GIVEN>
+     <TABLE>0.2812 0.0118 0.707 0.1018 0.8077 0.0905 0.031 0.9438 0.0252 </TABLE>
  </DEFINITION>
  <DEFINITION>
       <FOR>node3</FOR>
-     <TABLE>0.3035 0.3542 0.0308 0.3115 </TABLE>
+      <GIVEN>node2</GIVEN>
+     <TABLE>0.2563 0.0595 0.1324 0.3086 0.2432 0.3536 0.1063 0.3532 0.0726 0.1143 0.0496 0.3169 0.3279 0.1053 0.2003 </TABLE>
  </DEFINITION>
 </NETWORK>
 </BIF>

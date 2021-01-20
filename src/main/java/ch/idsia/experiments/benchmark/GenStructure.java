@@ -1,6 +1,7 @@
 package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.model.generator.BNGenerator;
+import ch.idsia.crema.utility.RandomUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,9 +17,9 @@ public class GenStructure {
 
     public static void main(String[] args) throws Exception {
         String[] structs = {"singly", "multi"}; // singly (polytree), multi
-        int[] maxInDegree = {2,4,6};
         int[] numNodes = {4,6,8,10};
         int[] maxDegree = {6};
+        int[] maxInDegree = {2,4,6};
         int[] maxValues = {3,4,5};
 
 
@@ -46,8 +47,14 @@ public class GenStructure {
 
         System.out.println("\n"+baseFileName);
 
+        RandomUtil.setRandomSeed(param_str.hashCode());
 
         BNGenerator gen = new BNGenerator(n, mD);
+
+        // Set random seed
+        System.out.println(param_str.hashCode());
+
+
 
         //// Generation process /////
         // Optional parameters
