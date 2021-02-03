@@ -12,15 +12,12 @@ public class GenStructure {
     static int nGraphs = 3;
     static int maxInducedWidth = 8;
 
-
-    // todo check random seed: dependand of the parameters
-
     public static void main(String[] args) throws Exception {
         String[] structs = {"singly", "multi"}; // singly (polytree), multi
         int[] numNodes = {4,6,8,10};
         int[] maxDegree = {6};
         int[] maxInDegree = {2,4,6};
-        int[] maxValues = {3,4,5};
+        int[] maxValues = {4}; // binary and ternary variables
 
 
         for(int n: numNodes){
