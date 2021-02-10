@@ -2,7 +2,7 @@ package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.IO;
 import ch.idsia.crema.factor.credal.vertex.VertexFactor;
-import ch.idsia.crema.model.graphical.SparseModel;
+import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.model.io.bif.XMLBIFParser;
 import ch.idsia.crema.utility.RandomUtil;
 import ch.idsia.crema.utility.hull.LPConvexHull;
@@ -39,7 +39,7 @@ public class GenVmodels {
         for(String bnetFile : files) {
             System.out.println("Processing "+(i++)+"/"+files.size());
             System.out.println(bnetFile);
-            SparseModel bnet = readBnet(bnetFile);
+            DAGModel bnet = readBnet(bnetFile);
             System.out.println("Reading "+bnetFile);
             for(int nV : nVert) {
                 // get the name of the output uai file
@@ -49,7 +49,7 @@ public class GenVmodels {
                 RandomUtil.setRandomSeed(name.hashCode());
 
                 // generate the new model and write it
-                SparseModel vmodel = buildVmodel(bnet, nV);
+                DAGModel vmodel = buildVmodel(bnet, nV);
                 System.out.println("Saving " + vmodelFolder + "" + name);
                 IO.write(vmodel, vmodelFolder + "" + name);
             }
@@ -76,15 +76,15 @@ public class GenVmodels {
                     .collect(Collectors.toList());
     }
 
-    public static SparseModel readBnet(String bnetFile) throws SAXException, IOException, ParserConfigurationException {
+    public static DAGModel readBnet(String bnetFile) throws SAXException, IOException, ParserConfigurationException {
         XMLBIFParser parser = new XMLBIFParser();
         FileInputStream fio = new FileInputStream(bnetFile);
-        return parser.parse(fio);
+        return (DAGModel) parser.parse(fio);
     }
 
-    public static SparseModel buildVmodel(SparseModel bnet, int nVert) {
+    public static DAGModel buildVmodel(DAGModel bnet, int nVert) {
         // generate an credal network with the same structure but without factor
-        SparseModel vmodel = new SparseModel();
+        DAGModel vmodel = new DAGModel();
 
         for(int x : bnet.getVariables()) {
             int cardX = Math.max(bnet.getDomain(x).getCardinality(x), 2);

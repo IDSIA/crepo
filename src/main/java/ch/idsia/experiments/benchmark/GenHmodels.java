@@ -3,7 +3,7 @@ package ch.idsia.experiments.benchmark;
 import ch.idsia.crema.IO;
 import ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor;
 import ch.idsia.crema.factor.credal.vertex.VertexFactor;
-import ch.idsia.crema.model.graphical.SparseModel;
+import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.experiments.Convert;
 
 import java.io.IOException;
@@ -31,10 +31,10 @@ public class GenHmodels {
                 // Load the vmodel
                 System.out.println("Processing "+(i++)+"/"+files.size());
                 System.out.println(vfile);
-                SparseModel vmodel = (SparseModel) IO.read(vfile);
+                DAGModel vmodel = (DAGModel) IO.read(vfile);
 
                 // Convert the model
-                SparseModel hmodel = buildHmodel(vmodel);
+                DAGModel hmodel = buildHmodel(vmodel);
 
                 // Save the hmodel
                 String name = vfile.substring(vfile.lastIndexOf("/")+1).replace("vmodel", "hmodel");
@@ -66,9 +66,9 @@ public class GenHmodels {
     }
 
 
-    public static SparseModel buildHmodel(SparseModel vmodel) throws IOException, InterruptedException {
+    public static DAGModel buildHmodel(DAGModel vmodel) throws IOException, InterruptedException {
 
-        SparseModel hmodel = (SparseModel) vmodel.copy();
+        DAGModel hmodel = (DAGModel) vmodel.copy();
         int[] variables = vmodel.getVariables();
 
         System.out.println("Converting "+variables.length+" v-factors");

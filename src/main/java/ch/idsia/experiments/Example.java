@@ -1,6 +1,6 @@
 package ch.idsia.experiments;
 import ch.idsia.crema.factor.bayesian.BayesianFactor;
-import ch.idsia.crema.model.graphical.SparseModel;
+import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.model.io.bif.XMLBIFParser;
 import org.xml.sax.SAXException;
 
@@ -14,9 +14,9 @@ public class Example {
         System.out.println("example class");
 
         XMLBIFParser parser = new XMLBIFParser();
-		FileInputStream fio = new FileInputStream("networks/Benchmark-long1.xml");
+		FileInputStream fio = new FileInputStream("networks/precise/bnet-mult_n4_mID2_mD6_mV4-1.xml");
 
-        SparseModel<BayesianFactor> model = parser.parse(fio);
+        DAGModel<BayesianFactor> model = (DAGModel<BayesianFactor>) parser.parse(fio);
 
         System.out.println(model);
 

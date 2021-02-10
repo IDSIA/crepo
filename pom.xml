@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ch.idsia</groupId>
-    <artifactId>crema-template</artifactId>
+    <artifactId>crema-benchmark</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <repositories>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>ch.idsia</groupId>
             <artifactId>crema</artifactId>
-            <version>0.1.6-randomCS-SNAPSHOT</version>
+            <version>0.1.6.c-dev-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.sis/profiles -->

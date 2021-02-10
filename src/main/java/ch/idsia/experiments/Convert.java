@@ -3,8 +3,8 @@ package ch.idsia.experiments;
 import ch.idsia.crema.factor.convert.HalfspaceToVertex;
 import ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor;
 import ch.idsia.crema.factor.credal.vertex.VertexFactor;
-import ch.idsia.crema.model.Strides;
-import ch.idsia.crema.model.graphical.SparseModel;
+import ch.idsia.crema.core.Strides;
+import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.utility.ArraysUtil;
 import ch.idsia.util;
 import org.apache.commons.math3.optim.linear.Relationship;
@@ -256,7 +256,7 @@ public class Convert {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        SparseModel cnet = new SparseModel();
+        DAGModel cnet = new DAGModel();
         int a = cnet.addVariable(2);
         int b = cnet.addVariable(3);
         int c = cnet.addVariable(4);
