@@ -1,6 +1,7 @@
 package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.IO;
+import ch.idsia.crema.factor.credal.linear.IntervalFactor;
 import ch.idsia.crema.inference.approxlp.CredalApproxLP;
 import ch.idsia.crema.inference.ve.CredalVariableElimination;
 import ch.idsia.crema.model.graphical.DAGModel;
@@ -15,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
@@ -122,14 +124,24 @@ public class GenQueries {
 	public static boolean isApproxEval(String vmodelPath, int target, int observed) throws IOException, InterruptedException {
 		String hmodelPath = vmodelPath.replace("vmodel","hmodel");
 		DAGModel hmodel = (DAGModel)IO.read(hmodelPath);
+		CredalApproxLP inf = new CredalApproxLP(hmodel);
+
 		boolean eval = true;
+
+		TIntIntHashMap evidence = new TIntIntHashMap();
+		if (observed != -1)
+			evidence.put(observed, 0);
+
+
+		ExecutorService executorService = Executors.newSingleThreadExecutor();
+		Future<Boolean> future = executorService.submit(new Evaluation(hmodel, target, evidence));
 		try {
-			CredalApproxLP inf = new CredalApproxLP(hmodel);
-			TIntIntHashMap evidence = new TIntIntHashMap();
-			if (observed != -1)
-				evidence.put(observed, 0);
-			inf.query(target, evidence);
-		}catch (Exception e){
+			eval = future.get(30L, TimeUnit.MINUTES);
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+			eval = false;
+		} catch (TimeoutException e) {
+			e.printStackTrace();
 			eval = false;
 		}
 		return eval;
@@ -145,4 +157,10 @@ public class GenQueries {
 				.map(f -> f.toString())
 				.collect(Collectors.toList());
 	}
+
+
+
+
 }
+
+
