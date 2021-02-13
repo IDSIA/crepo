@@ -30,6 +30,7 @@ public class GenVmodels {
 
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, InterruptedException {
 
+        System.out.println("Generating Vmodels");
         String prj_dir = ".";
         String preciseFolder = prj_dir+"/networks/precise/";
         String vmodelFolder = prj_dir+"/networks/vmodel/";
