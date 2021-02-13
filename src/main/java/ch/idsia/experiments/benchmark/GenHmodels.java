@@ -67,19 +67,8 @@ public class GenHmodels {
 
 
     public static DAGModel buildHmodel(DAGModel vmodel) throws IOException, InterruptedException {
-
-        DAGModel hmodel = (DAGModel) vmodel.copy();
-        int[] variables = vmodel.getVariables();
-
-        System.out.println("Converting "+variables.length+" v-factors");
-
-        for (int x : variables) {
-            SeparateHalfspaceFactor hf = Convert.vertexToHspace((VertexFactor) vmodel.getFactor(x));
-            hmodel.setFactor(x, hf);
-            System.out.print(".");
-        }
-        System.out.println();
-        return hmodel;
+        System.out.println("Converting "+vmodel.getVariables().length+" v-factors");
+        return Convert.VmodelToHmodel(vmodel);
     }
 
 }

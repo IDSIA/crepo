@@ -1,11 +1,14 @@
 package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.IO;
+import ch.idsia.crema.factor.convert.HalfspaceToVertex;
+import ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor;
 import ch.idsia.crema.factor.credal.vertex.VertexFactor;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.model.io.bif.XMLBIFParser;
 import ch.idsia.crema.utility.RandomUtil;
 import ch.idsia.crema.utility.hull.LPConvexHull;
+import ch.idsia.experiments.Convert;
 import com.google.common.collect.Lists;
 import org.xml.sax.SAXException;
 
@@ -29,14 +32,22 @@ public class GenVmodels {
         String prj_dir = ".";
         String preciseFolder = prj_dir+"/networks/precise/";
         String vmodelFolder = prj_dir+"/networks/vmodel/";
-        int[] nVert = {2, 4, 6};
+        //int[] nVert = {2, 4, 6};
+        int[] nVert = {4};
+
 
 
         List<String> files = getFiles(preciseFolder);
 
 
+
+
         int i = 1;
         for(String bnetFile : files) {
+
+            System.out.println(bnetFile);
+            //bnetFile = "./networks/precise/bnet-mult_n4_mID2_mD6_mV4-3.xml";
+
             System.out.println("Processing "+(i++)+"/"+files.size());
             System.out.println(bnetFile);
             DAGModel bnet = readBnet(bnetFile);
@@ -94,12 +105,46 @@ public class GenVmodels {
             // add the same parents
             vmodel.addParents(x, bnet.getParents(x));
             // generate a random
-            if(vmodel.getParents(x).length == 0)
-                vmodel.setFactor(x, VertexFactor.random(vmodel.getDomain(x), nVert, numDecimals, true));
-            else
-                vmodel.setFactor(x, VertexFactor.random(vmodel.getDomain(x), vmodel.getDomain(vmodel.getParents(x)), nVert, numDecimals, false));
+            setRandomVFactor(vmodel, x, nVert);
 
         }
         return vmodel;
+    }
+
+    public static void setRandomVFactor(DAGModel vmodel, int x, int nVert) {
+        VertexFactor vf = null;
+        boolean repeat = true;
+        int i = 0;
+
+        do {
+            i++;
+            if(vmodel.getParents(x).length == 0)
+                vf = VertexFactor.random(vmodel.getDomain(x), nVert, numDecimals, true);
+            else
+                vf = VertexFactor.random(vmodel.getDomain(x), vmodel.getDomain(vmodel.getParents(x)), nVert, numDecimals, false);
+
+            // Check if it can be converted V -> H and H --> V
+            try {
+                SeparateHalfspaceFactor hf = Convert.vertexToHspace(vf);
+                VertexFactor vf2 = new HalfspaceToVertex().apply(hf, x);
+                if(vf2 == null)
+                    throw  new IllegalStateException();
+                else
+                    repeat = false;
+            }catch (Exception e){
+                System.out.print(".");
+                repeat = true;
+            }
+        }while (repeat);
+
+
+        System.out.println(i+" repetitions");
+
+
+
+        vmodel.setFactor(x, vf);
+
+
+
     }
 }

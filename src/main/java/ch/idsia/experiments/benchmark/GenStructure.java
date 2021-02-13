@@ -9,7 +9,7 @@ import java.util.Map;
 public class GenStructure {
 
     // constant
-    static int nGraphs = 3;
+    static int nGraphs = 5;
     static int maxInducedWidth = 8;
 
     public static void main(String[] args) throws Exception {

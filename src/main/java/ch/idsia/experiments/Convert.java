@@ -253,101 +253,31 @@ public class Convert {
         return Arrays.asList(b, Aexp);
     }
 
+    public static DAGModel VmodelToHmodel(DAGModel vmodel) throws IOException, InterruptedException {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+        DAGModel hmodel = (DAGModel) vmodel.copy();
+        int[] variables = vmodel.getVariables();
 
-        DAGModel cnet = new DAGModel();
-        int a = cnet.addVariable(2);
-        int b = cnet.addVariable(3);
-        int c = cnet.addVariable(4);
-
-        cnet.addParent(a,b);
-
-
-        VertexFactor fb = new VertexFactor(cnet.getDomain(b), Strides.empty());
-        // specify the extreme points
-/*        fb.addVertex(new double[]{0.2, 0.5, 0.3});
-        fb.addVertex(new double[]{0.3, 0.4, 0.3});
-        fb.addVertex(new double[]{0.3, 0.2, 0.5});
-*/
-        // specify the extreme points
-        fb.addVertex(new double[]{0.45, 0.227, 0.323});
-        fb.addVertex(new double[]{0.857, 0.086, 0.057});
-
-        VertexFactor fc = new VertexFactor(cnet.getDomain(c), Strides.empty());
-
-        //fc.addVertex(new double[]{0.2, 0.5, 0.2, 0.1});
-        fc.addVertex(new double[]{0.3, 0.4, 0.3, 0.0});
-        fc.addVertex(new double[]{0.3, 0.2, 0.5, 0.0});
-
-
-        //factor.addVertex(new double[]{0.0, 0.2, 0.8});
-
-        // attach the factor to the model
-        cnet.setFactor(b,fb);
-        // create the credal set K(A|B)
-        VertexFactor fa = new VertexFactor(cnet.getDomain(a), cnet.getDomain(b));
-        // specify the extreme points
-        fa.addVertex(new double[]{0.5, 0.5}, 0);
-        fa.addVertex(new double[]{0.6, 0.4}, 0);
-        fa.addVertex(new double[]{0.3, 0.7}, 1);
-        fa.addVertex(new double[]{0.4, 0.4}, 1);
-        fa.addVertex(new double[]{0.2, 0.8}, 2);
-        fa.addVertex(new double[]{0.1, 0.9}, 2);
-
-        // attach the factor to the model
-
-        VertexFactor vf = null;
-        SeparateHalfspaceFactor hf = null;
-/*
-        System.out.println("\n2 vertices over 2 dims");
-        vf = fa;
-        System.out.println("original V-model:");
-        System.out.println(vf);
-        System.out.println("H-model:");
-        hf = vertexToHspace(vf);
-        hf.printLinearProblem();
-        System.out.println("Reconverted to V-model:");
-        System.out.println(new HalfspaceToVertex().apply(hf, hf.getDataDomain().getVariables()[0]));
-*/
-
-        System.out.println("\n2 vertices over 3 dims");
-        vf = fb;
-        System.out.println("original V-model:");
-        System.out.println(vf);
-        System.out.println("H-model:");
-        hf = vertexToHspace(vf);
-        hf.printLinearProblem();
-        System.out.println("Reconverted to V-model:");
-        System.out.println(new HalfspaceToVertex().apply(hf, hf.getDataDomain().getVariables()[0]).convexHull(true));
-
-
-
-        System.out.println("\n3 vertices over 3 dims");
-        //fb.addVertex(new double[]{0.8570001, 0.086, 0.057});
-
-        vf = fb;
-        System.out.println("original V-model:");
-        System.out.println(vf);
-        System.out.println("H-model:");
-        hf = vertexToHspace(vf);
-        hf.printLinearProblem();
-        System.out.println("Reconverted to V-model:");
-        System.out.println(new HalfspaceToVertex().apply(hf, hf.getDataDomain().getVariables()[0]).convexHull(true));
-
-
-        System.out.println("\n2 vertices over 4 dims");
-        vf = fc;
-        System.out.println("original V-model:");
-        System.out.println(vf);
-        System.out.println("H-model:");
-        hf = vertexToHspace(vf);
-        hf.printLinearProblem();
-        System.out.println("Reconverted to V-model:");
-        System.out.println(new HalfspaceToVertex().apply(hf, hf.getDataDomain().getVariables()[0]));
-
-
-
+        for (int x : variables) {
+            SeparateHalfspaceFactor hf = Convert.vertexToHspace((VertexFactor) vmodel.getFactor(x));
+            hmodel.setFactor(x, hf);
+        }
+        return hmodel;
     }
+
+    public static DAGModel HmodelToVmodel(DAGModel hmodel) throws IOException, InterruptedException {
+
+        DAGModel vmodel = (DAGModel) hmodel.copy();
+        int[] variables = hmodel.getVariables();
+
+        for (int x : variables) {
+            VertexFactor vf = (new HalfspaceToVertex()).apply((SeparateHalfspaceFactor) hmodel.getFactor(x), x);
+            vmodel.setFactor(x, vf);
+        }
+        return vmodel;
+    }
+
+
+
 
 }

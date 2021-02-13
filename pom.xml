@@ -19,7 +19,7 @@
         <dependency>
             <groupId>ch.idsia</groupId>
             <artifactId>crema</artifactId>
-            <version>0.1.6.c-dev-SNAPSHOT</version>
+            <version>0.1.6-isipta21bm-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.sis/profiles -->
@@ -28,6 +28,21 @@
             <artifactId>profiles</artifactId>
             <version>1.0</version>
             <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli</artifactId>
+            <version>3.9.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
         </dependency>
     </dependencies>
 
