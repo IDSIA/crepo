@@ -24,7 +24,7 @@ public class GenQueries {
 
 		ArrayList<String> fail = new ArrayList<>();
 
-		String prj_folder = "/Users/rcabanas/GoogleDrive/IDSIA/causality/dev/idsia-papers/2021-SIPTA-crema/";
+		String prj_folder = ".";
 		String modelFolder = prj_folder+"/networks/vmodel/";
 		String queryFolder = prj_folder+"/queries/";
 
