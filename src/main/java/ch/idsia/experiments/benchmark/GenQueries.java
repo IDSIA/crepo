@@ -1,6 +1,7 @@
 package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.IO;
+import ch.idsia.crema.inference.approxlp.CredalApproxLP;
 import ch.idsia.crema.inference.ve.CredalVariableElimination;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.utility.ArraysUtil;
@@ -12,31 +13,40 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
 public class GenQueries {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 
+		ArrayList<String> fail = new ArrayList<>();
 
 		String prj_folder = "/Users/rcabanas/GoogleDrive/IDSIA/causality/dev/idsia-papers/2021-SIPTA-crema/";
 		String modelFolder = prj_folder+"/networks/vmodel/";
 		String queryFolder = prj_folder+"/queries/";
 
-
 		for(String modelFile : getFiles(modelFolder)) {
 			System.out.println("Reading "+modelFile);
-			DAGModel model = (DAGModel) IO.read(modelFile);
-			String queryStr = getMaximalQuery(model);
-			System.out.println(queryStr);
-			saveQueryCSV(queryFolder, modelFile, queryStr);
+			String queryStr = getMaximalQuery(modelFile);
+			if(queryStr != null) {
+				System.out.println(queryStr);
+				saveQueryCSV(queryFolder, modelFile, queryStr);
+			}else{
+				System.out.println("FAILED TO FIND QUERY");
+				fail.add(modelFile);
+			}
 		}
+
+		System.out.println("Failed\n==============");
+		fail.forEach(System.out::println);
 
 	}
 
 	public static void saveQueryCSV(String queryFolder, String modelFile, String queryStr) throws FileNotFoundException {
-		String content = "target,observed\n";
+		String content = "target,observed,size\n";
 		content+=queryStr;
 		content+="\n";
 
@@ -53,46 +63,78 @@ public class GenQueries {
 		}
 	}
 
-	public static String getMaximalQuery(DAGModel model) {
+	public static String getMaximalQuery(String vmodelPath) throws IOException, InterruptedException {
 		// marginal or conditional query with a maximal inference network
 
+		DAGModel model = (DAGModel) IO.readUAI(vmodelPath);
 		CredalVariableElimination ve = new CredalVariableElimination(model);
 
 		int target = -1;
 		int maxSize = 0;
 		int observed = -1;
 
+
+		//[List(double<x,y>), ... List(double<x,y>), ]
+		ArrayList[] sizes = IntStream.rangeClosed(0,model.getVariables().length).mapToObj(i-> new ArrayList<int[]>()).toArray(ArrayList[]::new);
+
+
 		for(int x : model.getVariables()){
 			for(int y: ArraysUtil.append(model.getVariables(), -1)) {
 				if(x!=y){
-
 					TIntIntHashMap evidence = new TIntIntHashMap();
 					if(y!=-1)
 						evidence.put(y,0);
-
 					int s = ve.getInferenceModel(x, evidence).getVariables().length;
+					sizes[s].add(new int[]{x,y});
 
-					if (s > maxSize) {
-						target = x;
-						observed = y;
-						maxSize = s;
-
-						if(maxSize==model.getVariables().length)
-							break;
-					}
 				}
 			}
 		}
 
+		for(int i = sizes.length-1; i>=0; i--){
+			System.out.println(i);
 
-		String queryStr = target +",";
-		if(observed != -1){
-			queryStr += observed;
+			for(Object p : sizes[i]){
+				target = ((int[])p)[0];
+				observed =  ((int[])p)[1];
+				System.out.println(target+"|"+observed);
+
+				if(isApproxEval(vmodelPath, target, observed)){
+					String queryStr = target +",";
+					if(observed != -1){
+						queryStr += observed;
+					}
+					queryStr+=","+i;
+
+					System.out.println(maxSize+"/"+model.getVariables().length+" nodes:\t"+queryStr);
+					return queryStr;
+				}
+
+			}
 		}
 
-		System.out.println(maxSize+"/"+model.getVariables().length+" nodes:\t"+queryStr);
-		return queryStr;
+		return null;
+
+
+
 	}
+
+	public static boolean isApproxEval(String vmodelPath, int target, int observed) throws IOException, InterruptedException {
+		String hmodelPath = vmodelPath.replace("vmodel","hmodel");
+		DAGModel hmodel = (DAGModel)IO.read(hmodelPath);
+		boolean eval = true;
+		try {
+			CredalApproxLP inf = new CredalApproxLP(hmodel);
+			TIntIntHashMap evidence = new TIntIntHashMap();
+			if (observed != -1)
+				evidence.put(observed, 0);
+			inf.query(target, evidence);
+		}catch (Exception e){
+			eval = false;
+		}
+		return eval;
+	}
+
 
 	public static List<String> getFiles(String folder) throws IOException {
 		return StreamSupport

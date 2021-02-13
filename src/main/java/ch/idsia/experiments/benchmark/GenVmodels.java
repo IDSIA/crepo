@@ -140,9 +140,13 @@ public class GenVmodels {
                 if (Convert.isConvertible(vfi, leftDomain.getVariables()[0]))
                     data[i] = vfi.getData()[0];
             } while (data[i] == null);
-            System.out.print("|");
+           if(i<data.length-1)
+               System.out.print("/");
+           else
+               System.out.print("|");
+
+
         }
-        System.out.print("||");
         // build final factor
         return new VertexFactor(leftDomain, rightDomain, data);
     }
