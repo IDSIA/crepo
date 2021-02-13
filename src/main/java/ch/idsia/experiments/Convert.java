@@ -277,6 +277,18 @@ public class Convert {
         return vmodel;
     }
 
+    public static boolean isConvertible(VertexFactor vf, int leftVar) throws IOException, InterruptedException {
+        VertexFactor vf2 = null;
+        boolean convertible = true;
+        try {
+            vf2 = new HalfspaceToVertex().apply(Convert.margVertexToHspace(vf), leftVar);
+        }catch (Exception e){
+            convertible = false;
+        }
+
+        return convertible && vf2 != null;
+    }
+
 
 
 

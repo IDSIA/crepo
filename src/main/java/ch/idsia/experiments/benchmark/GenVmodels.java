@@ -1,6 +1,7 @@
 package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.IO;
+import ch.idsia.crema.core.Strides;
 import ch.idsia.crema.factor.convert.HalfspaceToVertex;
 import ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor;
 import ch.idsia.crema.factor.credal.vertex.VertexFactor;
@@ -27,13 +28,13 @@ public class GenVmodels {
     static int numDecimals = 3;
 
 
-    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException {
+    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, InterruptedException {
 
         String prj_dir = ".";
         String preciseFolder = prj_dir+"/networks/precise/";
         String vmodelFolder = prj_dir+"/networks/vmodel/";
-        //int[] nVert = {2, 4, 6};
-        int[] nVert = {4};
+        int[] nVert = {2, 4, 6};
+        //int[] nVert = {4};
 
 
 
@@ -61,7 +62,7 @@ public class GenVmodels {
 
                 // generate the new model and write it
                 DAGModel vmodel = buildVmodel(bnet, nV);
-                System.out.println("Saving " + vmodelFolder + "" + name);
+                System.out.println("\nSaving " + vmodelFolder + "" + name);
                 IO.write(vmodel, vmodelFolder + "" + name);
             }
 
@@ -93,7 +94,7 @@ public class GenVmodels {
         return (DAGModel) parser.parse(fio);
     }
 
-    public static DAGModel buildVmodel(DAGModel bnet, int nVert) {
+    public static DAGModel buildVmodel(DAGModel bnet, int nVert) throws IOException, InterruptedException {
         // generate an credal network with the same structure but without factor
         DAGModel vmodel = new DAGModel();
 
@@ -111,40 +112,37 @@ public class GenVmodels {
         return vmodel;
     }
 
-    public static void setRandomVFactor(DAGModel vmodel, int x, int nVert) {
+    public static void setRandomVFactor(DAGModel vmodel, int x, int nVert) throws IOException, InterruptedException {
         VertexFactor vf = null;
-        boolean repeat = true;
-        int i = 0;
-
-        do {
-            i++;
-            if(vmodel.getParents(x).length == 0)
-                vf = VertexFactor.random(vmodel.getDomain(x), nVert, numDecimals, true);
-            else
-                vf = VertexFactor.random(vmodel.getDomain(x), vmodel.getDomain(vmodel.getParents(x)), nVert, numDecimals, false);
-
-            // Check if it can be converted V -> H and H --> V
-            try {
-                SeparateHalfspaceFactor hf = Convert.vertexToHspace(vf);
-                VertexFactor vf2 = new HalfspaceToVertex().apply(hf, x);
-                if(vf2 == null)
-                    throw  new IllegalStateException();
-                else
-                    repeat = false;
-            }catch (Exception e){
-                System.out.print(".");
-                repeat = true;
-            }
-        }while (repeat);
-
-
-        System.out.println(i+" repetitions");
-
-
+        if(vmodel.getParents(x).length == 0)
+            vf = random(vmodel.getDomain(x), Strides.empty(), nVert, numDecimals, true);
+        else
+            vf = random(vmodel.getDomain(x), vmodel.getDomain(vmodel.getParents(x)), nVert, numDecimals, true);
 
         vmodel.setFactor(x, vf);
 
 
 
+    }
+
+
+    public static VertexFactor random(Strides leftDomain, Strides rightDomain, int nVert, int num_decimals, boolean zero_allowed) throws IOException, InterruptedException {
+
+        // array for storing the vertices
+        double data[][][] = new double[rightDomain.getCombinations()][][];
+
+        // generate independently for each parent
+        for (int i = 0; i < data.length; i++) {
+            do {
+                System.out.print(".");
+                VertexFactor vfi = VertexFactor.random(leftDomain, nVert, numDecimals, true);
+                if (Convert.isConvertible(vfi, leftDomain.getVariables()[0]))
+                    data[i] = vfi.getData()[0];
+            } while (data[i] == null);
+            System.out.print("|");
+        }
+        System.out.print("||");
+        // build final factor
+        return new VertexFactor(leftDomain, rightDomain, data);
     }
 }
