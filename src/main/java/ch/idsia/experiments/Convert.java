@@ -265,6 +265,7 @@ public class Convert {
         return hmodel;
     }
 
+    @SuppressWarnings("all")
     public static DAGModel HmodelToVmodel(DAGModel hmodel) throws IOException, InterruptedException {
 
         DAGModel vmodel = (DAGModel) hmodel.copy();

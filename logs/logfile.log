@@ -209,3 +209,332 @@
 [2021-02-12_18:32:15][INFO][java] Starting experiments
 [2021-02-12_18:32:15][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
 [2021-02-12_18:32:15][SEVERE][java] org.apache.commons.math3.optim.linear.NoFeasibleSolutionException: no feasible solution
+[2021-02-14_11:13:15][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:13:15][INFO][java] Input args: -et --method=cve -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:13:15][INFO][java] Starting experiments
+[2021-02-14_11:13:15][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:13:19][INFO][java] Warmup iteration 1/1 (4329 ms.)
+[2021-02-14_11:13:22][INFO][java] Measurable iteration 1/2 (2630 ms.)
+[2021-02-14_11:13:25][INFO][java] Measurable iteration 2/2 (2830 ms.)
+[2021-02-14_11:13:25][INFO][java] Processing results
+[2021-02-14_11:15:35][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:15:35][INFO][java] Input args: -et --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:15:35][INFO][java] Starting experiments
+[2021-02-14_11:15:35][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:15:37][INFO][java] Warmup iteration 1/1 (1396 ms.)
+[2021-02-14_11:15:37][INFO][java] Measurable iteration 1/2 (671 ms.)
+[2021-02-14_11:15:38][INFO][java] Measurable iteration 2/2 (283 ms.)
+[2021-02-14_11:15:38][INFO][java] Running exact inference
+[2021-02-14_11:18:07][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:18:07][INFO][java] Input args: -et --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:18:07][INFO][java] Starting experiments
+[2021-02-14_11:18:08][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:18:09][INFO][java] Warmup iteration 1/1 (1146 ms.)
+[2021-02-14_11:18:09][INFO][java] Measurable iteration 1/2 (622 ms.)
+[2021-02-14_11:18:10][INFO][java] Measurable iteration 2/2 (372 ms.)
+[2021-02-14_11:18:10][INFO][java] Running exact inference
+[2021-02-14_11:20:07][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:20:07][INFO][java] Input args: -et --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:20:07][INFO][java] Starting experiments
+[2021-02-14_11:20:07][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:20:09][INFO][java] Warmup iteration 1/1 (1351 ms.)
+[2021-02-14_11:20:09][INFO][java] Measurable iteration 1/2 (590 ms.)
+[2021-02-14_11:20:10][INFO][java] Measurable iteration 2/2 (508 ms.)
+[2021-02-14_11:20:10][INFO][java] Running exact inference
+[2021-02-14_11:22:01][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:22:01][INFO][java] Input args: -et --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:22:01][INFO][java] Starting experiments
+[2021-02-14_11:22:01][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:22:02][INFO][java] Warmup iteration 1/1 (1214 ms.)
+[2021-02-14_11:22:03][INFO][java] Measurable iteration 1/2 (668 ms.)
+[2021-02-14_11:22:03][INFO][java] Measurable iteration 2/2 (402 ms.)
+[2021-02-14_11:22:03][INFO][java] Running exact inference
+[2021-02-14_11:23:01][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:23:01][INFO][java] Input args: -et --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:23:01][INFO][java] Starting experiments
+[2021-02-14_11:23:02][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:23:16][INFO][java] Warmup iteration 1/1 (14616 ms.)
+[2021-02-14_11:23:20][INFO][java] Measurable iteration 1/2 (3406 ms.)
+[2021-02-14_11:23:20][INFO][java] Measurable iteration 2/2 (297 ms.)
+[2021-02-14_11:23:31][INFO][java] Running exact inference
+[2021-02-14_11:28:30][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:28:30][INFO][java] Input args: -t --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:28:30][INFO][java] Starting experiments
+[2021-02-14_11:28:31][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:28:32][INFO][java] Warmup iteration 1/1 (1374 ms.)
+[2021-02-14_11:28:33][INFO][java] Measurable iteration 1/2 (555 ms.)
+[2021-02-14_11:28:33][INFO][java] Measurable iteration 2/2 (317 ms.)
+[2021-02-14_11:28:33][INFO][java] Processing results
+[2021-02-14_11:31:33][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:31:33][INFO][java] Input args: -t --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:31:33][INFO][java] Starting experiments
+[2021-02-14_11:31:33][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:31:34][INFO][java] Warmup iteration 1/1 (1242 ms.)
+[2021-02-14_11:31:35][INFO][java] Measurable iteration 1/2 (514 ms.)
+[2021-02-14_11:31:35][INFO][java] Measurable iteration 2/2 (450 ms.)
+[2021-02-14_11:31:35][INFO][java] Processing results
+[2021-02-14_11:31:35][INFO][java] results=dict(time=482)
+[2021-02-14_11:32:08][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:32:08][INFO][java] Input args: -t --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:32:08][INFO][java] Starting experiments
+[2021-02-14_11:32:08][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:32:10][INFO][java] Warmup iteration 1/1 (1341 ms.)
+[2021-02-14_11:32:10][INFO][java] Measurable iteration 1/2 (580 ms.)
+[2021-02-14_11:32:10][INFO][java] Measurable iteration 2/2 (345 ms.)
+[2021-02-14_11:32:10][INFO][java] Processing results
+[2021-02-14_11:32:10][INFO][java] results=dict(time=462.5)
+[2021-02-14_11:35:46][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:35:46][INFO][java] Input args: -t --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:35:46][INFO][java] Starting experiments
+[2021-02-14_11:35:47][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:35:48][INFO][java] Warmup iteration 1/1 (1348 ms.)
+[2021-02-14_11:35:49][INFO][java] Measurable iteration 1/2 (457 ms.)
+[2021-02-14_11:35:49][INFO][java] Measurable iteration 2/2 (436 ms.)
+[2021-02-14_11:35:49][INFO][java] Processing results
+[2021-02-14_11:35:49][INFO][java] results=dict(time=446.5)
+[2021-02-14_11:45:24][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:45:24][INFO][java] Input args: -t --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:45:24][INFO][java] Starting experiments
+[2021-02-14_11:45:24][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:45:26][INFO][java] Warmup iteration 1/1 (997 ms.)
+[2021-02-14_11:45:26][INFO][java] Measurable iteration 1/2 (560 ms.)
+[2021-02-14_11:45:27][INFO][java] Measurable iteration 2/2 (495 ms.)
+[2021-02-14_11:45:27][INFO][java] Processing results
+[2021-02-14_11:45:27][SEVERE][java] java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
+[2021-02-14_11:45:43][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:45:43][INFO][java] Input args: -t --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:45:43][INFO][java] Starting experiments
+[2021-02-14_11:45:43][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:45:44][INFO][java] Warmup iteration 1/1 (1013 ms.)
+[2021-02-14_11:45:44][INFO][java] Measurable iteration 1/2 (452 ms.)
+[2021-02-14_11:45:45][INFO][java] Measurable iteration 2/2 (282 ms.)
+[2021-02-14_11:45:45][INFO][java] Processing results
+[2021-02-14_11:46:38][SEVERE][java] java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
+[2021-02-14_11:46:43][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:46:43][INFO][java] Input args: -t --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:46:43][INFO][java] Starting experiments
+[2021-02-14_11:46:43][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:46:45][INFO][java] Warmup iteration 1/1 (1418 ms.)
+[2021-02-14_11:46:45][INFO][java] Measurable iteration 1/2 (559 ms.)
+[2021-02-14_11:46:46][INFO][java] Measurable iteration 2/2 (378 ms.)
+[2021-02-14_11:46:46][INFO][java] Processing results
+[2021-02-14_11:46:46][INFO][java] results=dict(time=468.5,post=[0.05443621399999996,0.5210499559999998,0.06447639200000002,0.7013936939999996,0.06903448799999998,0.5124473520000001,0.028065308000000264,0.5846097170000002])
+[2021-02-14_11:50:52][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:50:52][INFO][java] Input args: -t --method=cve -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:50:52][INFO][java] Starting experiments
+[2021-02-14_11:50:52][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:50:56][INFO][java] Warmup iteration 1/1 (4088 ms.)
+[2021-02-14_11:50:59][INFO][java] Measurable iteration 1/2 (2678 ms.)
+[2021-02-14_11:51:01][INFO][java] Measurable iteration 2/2 (2152 ms.)
+[2021-02-14_11:51:01][INFO][java] Processing results
+[2021-02-14_11:51:01][INFO][java] results=dict(time=2415.0,post=[0.012860647999999997,0.598357384,0.006260103999999999,0.7549393410000002,0.012808376000000002,0.562883368,0.028065308000000008,0.8869809590000002])
+[2021-02-14_11:52:07][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:52:07][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:52:07][INFO][java] Starting experiments
+[2021-02-14_11:52:07][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_11:52:11][INFO][java] Warmup iteration 1/1 (3243 ms.)
+[2021-02-14_11:52:12][INFO][java] Measurable iteration 1/2 (1570 ms.)
+[2021-02-14_11:52:14][INFO][java] Measurable iteration 2/2 (1414 ms.)
+[2021-02-14_11:52:14][INFO][java] Processing results
+[2021-02-14_11:52:14][INFO][java] results=dict(time=1492.0,post=[0.06798995099999999,0.4469660169533691,0.026310789023925783,0.479317350955925,0.028887379951171875,0.53050670375,0.10288926676611329,0.7950356337646486])
+[2021-02-14_11:52:41][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_11:52:41][INFO][java] Input args: -t --method=cve_ch -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_11:52:41][INFO][java] Starting experiments
+[2021-02-14_11:52:41][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_12:04:49][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_12:04:49][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:04:49][INFO][java] Starting experiments
+[2021-02-14_12:04:49][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_12:04:53][INFO][java] Warmup iteration 1/1 (3264 ms.)
+[2021-02-14_12:04:54][INFO][java] Measurable iteration 1/2 (1454 ms.)
+[2021-02-14_12:04:56][INFO][java] Measurable iteration 2/2 (1432 ms.)
+[2021-02-14_12:04:56][INFO][java] Processing results
+[2021-02-14_12:04:56][INFO][java] results=dict(time=1443.0,post=[0.06798995099999999,0.4469660169533691,0.026310789023925783,0.479317350955925,0.028887379951171875,0.53050670375,0.10288926676611329,0.7950356337646486])
+[2021-02-14_12:08:22][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_12:08:22][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:08:22][INFO][java] Starting experiments
+[2021-02-14_12:08:23][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_12:08:26][INFO][java] Warmup iteration 1/1 (3553 ms.)
+[2021-02-14_12:08:28][INFO][java] Measurable iteration 1/2 (1824 ms.)
+[2021-02-14_12:08:30][INFO][java] Measurable iteration 2/2 (1735 ms.)
+[2021-02-14_12:08:30][INFO][java] Processing results
+[2021-02-14_12:08:30][INFO][java] results=dict(time=1779.5,post=[0.06798995099999999,0.4469660169533691,0.026310789023925783,0.479317350955925,0.028887379951171875,0.53050670375,0.10288926676611329,0.7950356337646486])
+[2021-02-14_12:16:58][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_12:16:58][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:16:58][INFO][java] Starting experiments
+[2021-02-14_12:16:58][SEVERE][java] java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:17:43][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_12:17:43][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:17:43][INFO][java] Starting experiments
+[2021-02-14_12:17:43][SEVERE][java] java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:19:51][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_12:19:51][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:19:51][INFO][java] Starting experiments
+[2021-02-14_12:19:51][SEVERE][java] java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:19:51][INFO][java] Processing results
+[2021-02-14_12:36:22][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_12:36:22][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:36:22][INFO][java] Starting experiments
+[2021-02-14_12:36:22][SEVERE][java] java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:36:22][INFO][java] Processing results
+[2021-02-14_12:38:50][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_12:38:50][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:38:50][INFO][java] Starting experiments
+[2021-02-14_12:38:50][SEVERE][java] java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:38:50][INFO][java] Processing results
+[2021-02-14_12:38:55][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_12:38:55][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:38:55][INFO][java] Starting experiments
+[2021-02-14_12:39:14][SEVERE][java] java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:39:19][INFO][java] Processing results
+[2021-02-14_12:39:40][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_12:39:40][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:39:40][INFO][java] Starting experiments
+[2021-02-14_12:39:40][SEVERE][java] java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_12:39:40][INFO][java] Processing results
+[2021-02-14_12:39:40][INFO][java] results=dict(err_msg='java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai')
+[2021-02-14_17:50:40][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_17:50:40][INFO][java] Input args: -t --method=cve_ch10 -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_17:50:40][INFO][java] Starting experiments
+[2021-02-14_17:50:40][SEVERE][java] java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_17:50:40][INFO][java] Processing results
+[2021-02-14_17:50:40][INFO][java] results=dict(err_msg='java.nio.file.NoSuchFileException: ./networks/vmodel/AAAvmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai')
+[2021-02-14_17:51:13][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_17:51:13][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_17:51:13][INFO][java] Starting experiments
+[2021-02-14_17:51:13][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_17:51:13][SEVERE][java] java.lang.NullPointerException
+[2021-02-14_17:51:13][INFO][java] Processing results
+[2021-02-14_17:51:13][INFO][java] results=dict(err_msg='java.lang.NullPointerException')
+[2021-02-14_17:51:42][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_17:51:42][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_17:51:42][INFO][java] Starting experiments
+[2021-02-14_17:51:42][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_17:52:26][SEVERE][java] java.lang.NullPointerException
+[2021-02-14_17:52:26][INFO][java] Processing results
+[2021-02-14_17:52:28][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_17:52:28][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_17:52:28][INFO][java] Starting experiments
+[2021-02-14_17:52:28][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_17:52:44][SEVERE][java] java.lang.NullPointerException
+[2021-02-14_17:52:44][INFO][java] Processing results
+[2021-02-14_17:52:44][INFO][java] results=dict(err_msg='java.lang.NullPointerException')
+[2021-02-14_17:54:55][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_17:54:55][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_17:54:55][INFO][java] Starting experiments
+[2021-02-14_17:54:55][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_17:54:55][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor are in unnamed module of loader 'app')
+[2021-02-14_17:54:55][INFO][java] Processing results
+[2021-02-14_17:54:55][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor are in unnamed module of loader 'app')')
+[2021-02-14_17:55:13][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_17:55:13][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_17:55:13][INFO][java] Starting experiments
+[2021-02-14_17:55:13][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:17:05][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor are in unnamed module of loader 'app')
+[2021-02-14_19:17:05][INFO][java] Processing results
+[2021-02-14_19:27:04][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:27:04][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:27:04][INFO][java] Starting experiments
+[2021-02-14_19:27:04][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:27:04][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor are in unnamed module of loader 'app')
+[2021-02-14_19:27:04][INFO][java] Processing results
+[2021-02-14_19:27:04][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor are in unnamed module of loader 'app')')
+[2021-02-14_19:27:53][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:27:53][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:27:53][INFO][java] Starting experiments
+[2021-02-14_19:27:53][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:27:53][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_19:27:53][INFO][java] Processing results
+[2021-02-14_19:27:53][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')')
+[2021-02-14_19:28:14][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:28:14][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:28:14][INFO][java] Starting experiments
+[2021-02-14_19:28:14][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:34:48][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_19:34:48][INFO][java] Processing results
+[2021-02-14_19:35:14][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:35:14][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:35:14][INFO][java] Starting experiments
+[2021-02-14_19:35:14][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:35:14][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor are in unnamed module of loader 'app')
+[2021-02-14_19:35:14][INFO][java] Processing results
+[2021-02-14_19:35:14][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor are in unnamed module of loader 'app')')
+[2021-02-14_19:35:23][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:35:23][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:35:23][INFO][java] Starting experiments
+[2021-02-14_19:35:23][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:35:47][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor are in unnamed module of loader 'app')
+[2021-02-14_19:35:47][INFO][java] Processing results
+[2021-02-14_19:35:47][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor are in unnamed module of loader 'app')')
+[2021-02-14_19:36:39][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:36:39][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:36:39][INFO][java] Starting experiments
+[2021-02-14_19:36:39][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:36:39][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_19:36:39][INFO][java] Processing results
+[2021-02-14_19:36:39][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')')
+[2021-02-14_19:36:49][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:36:49][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:36:49][INFO][java] Starting experiments
+[2021-02-14_19:36:49][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:37:01][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_19:37:01][INFO][java] Processing results
+[2021-02-14_19:37:05][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:37:05][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:37:05][INFO][java] Starting experiments
+[2021-02-14_19:37:05][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:38:30][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_19:38:30][INFO][java] Processing results
+[2021-02-14_19:38:30][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')')
+[2021-02-14_19:38:36][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:38:36][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:38:36][INFO][java] Starting experiments
+[2021-02-14_19:38:36][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:40:20][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_19:40:20][INFO][java] Processing results
+[2021-02-14_19:40:20][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')')
+[2021-02-14_19:40:22][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:40:22][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:40:22][INFO][java] Starting experiments
+[2021-02-14_19:40:22][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:41:25][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_19:41:25][INFO][java] Processing results
+[2021-02-14_19:41:28][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_19:41:28][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_19:41:28][INFO][java] Starting experiments
+[2021-02-14_19:41:28][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_19:53:24][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_19:53:24][INFO][java] Processing results
+[2021-02-14_19:53:24][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')')
+[2021-02-14_20:16:22][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_20:16:22][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_20:16:22][INFO][java] Starting experiments
+[2021-02-14_20:16:22][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_20:16:22][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_20:16:22][INFO][java] Processing results
+[2021-02-14_20:16:22][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')')
+[2021-02-14_20:17:07][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_20:17:07][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_20:17:07][INFO][java] Starting experiments
+[2021-02-14_20:17:07][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_20:17:07][SEVERE][java] java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')
+[2021-02-14_20:17:07][INFO][java] Processing results
+[2021-02-14_20:17:07][INFO][java] results=dict(err_msg='java.lang.ClassCastException: class ch.idsia.crema.factor.credal.linear.IntervalFactor cannot be cast to class ch.idsia.crema.factor.Factor (ch.idsia.crema.factor.credal.linear.IntervalFactor and ch.idsia.crema.factor.Factor are in unnamed module of loader 'app')')
+[2021-02-14_20:17:26][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-14_20:17:26][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-14_20:17:26][INFO][java] Starting experiments
+[2021-02-14_20:17:26][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-14_20:17:28][INFO][java] Warmup iteration 1/1 (1391 ms.)
+[2021-02-14_20:17:28][INFO][java] Measurable iteration 1/2 (706 ms.)
+[2021-02-14_20:17:29][INFO][java] Measurable iteration 2/2 (536 ms.)
+[2021-02-14_20:17:29][INFO][java] Processing results
+[2021-02-14_20:17:29][INFO][java] results=dict(time=621.0,post=[0.01248308000000001,0.629566312,0.005681644000000002,0.773224224,0.010891195999999999,0.5730284560000001,0.026968163,0.8932456969999999])
+[2021-02-15_10:42:54][INFO][java] Saving log to: ./logs/logfile.log
+[2021-02-15_10:42:55][INFO][java] Input args: -t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+[2021-02-15_10:42:55][INFO][java] Starting experiments
+[2021-02-15_10:42:55][INFO][java] Loaded model ([0, 1, 2, 3], [(1,0), (2,0), (3,2)])
+[2021-02-15_10:42:56][INFO][java] Warmup iteration 1/1 (980 ms.)
+[2021-02-15_10:42:56][INFO][java] Measurable iteration 1/2 (580 ms.)
+[2021-02-15_10:42:57][INFO][java] Measurable iteration 2/2 (496 ms.)
+[2021-02-15_10:42:57][INFO][java] Processing results
+[2021-02-15_10:42:57][INFO][java] results=dict(time=538.0,post=[0.01248308000000001,0.629566312,0.005681644000000002,0.773224224,0.010891195999999999,0.5730284560000001,0.026968163,0.8932456969999999],arg_str='-t --method=intervallp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai')

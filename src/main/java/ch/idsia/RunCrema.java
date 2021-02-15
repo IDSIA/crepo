@@ -2,7 +2,9 @@ package ch.idsia;
 
 import ch.idsia.crema.IO;
 import ch.idsia.crema.factor.GenericFactor;
+import ch.idsia.crema.factor.convert.VertexToInterval;
 import ch.idsia.crema.factor.credal.linear.IntervalFactor;
+import ch.idsia.crema.factor.credal.vertex.VertexFactor;
 import ch.idsia.crema.inference.Inference;
 import ch.idsia.crema.inference.approxlp.CredalApproxLP;
 import ch.idsia.crema.inference.ve.CredalVariableElimination;
@@ -21,11 +23,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.*;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 
 /*
--et --method=cve -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+-t --method=cve -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+-t --method=approxlp -r 2 -w 1 -x 0 -y 1 --log=./logs/logfile.log ./networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+/Users/rcabanas/GoogleDrive/IDSIA/causality/dev/idsia-papers/2021-SIPTA-crema/networks/hmodel/hmodel-mult_n4_mID2_mD6_mV4_nV4-3.uai
+
+
  */
 
 public class RunCrema implements Runnable {
@@ -35,8 +42,10 @@ public class RunCrema implements Runnable {
 	private static Logger logger;
 
 	private GenericFactor result;
-	private GenericFactor exactResult;
+//	private GenericFactor exactResult;
 	private Long time;
+
+	private static String errMsg = "";
 
 	enum InferenceMethod {approxlp, intervallp, cve, cve_ch, cve_ch10, cve_ch5}
 
@@ -47,6 +56,11 @@ public class RunCrema implements Runnable {
 			InferenceMethod.cve_ch5,
 			InferenceMethod.cve_ch10
 		);
+
+	private final static List<InferenceMethod> LP_METHODS = List.of(
+			InferenceMethod.approxlp,
+			InferenceMethod.intervallp
+	);
 
 	private final static List<InferenceMethod> APPROX_METHODS = List.of(
 			InferenceMethod.approxlp,
@@ -79,8 +93,8 @@ public class RunCrema implements Runnable {
 	@Option(names = {"-t", "--time"}, description = "Measure time")
 	private boolean measureTime;
 
-	@Option(names = {"-e", "--error"}, description = "Measure error")
-	private boolean measureError;
+//	@Option(names = {"-e", "--error"}, description = "Measure error")
+//	private boolean measureError;
 
 	@Option(names = {"-w", "--warmups"}, description = "Number of warmups (which are not measured). Default is 0.")
 	public void setWarmups(int w){
@@ -113,6 +127,9 @@ public class RunCrema implements Runnable {
 	public static void main(String[] args) {
 		argStr = String.join(" ", args);
 		CommandLine.run(new RunCrema(), args);
+		if(errMsg!="")
+			System.exit(-1);
+
 	}
 
 
@@ -123,18 +140,19 @@ public class RunCrema implements Runnable {
 		try {
 			setUp();
 			logger.info("Input args: " + argStr);
-
 			experiments();
-			processResults();
 		}catch (Exception e){
-			logger.severe(e.toString());
-			e.printStackTrace();
-			System.exit(-1);
+			errMsg = e.toString();
+			logger.severe(errMsg);
+			//e.printStackTrace();
 
 		}catch (Error e){
-			logger.severe(e.toString());
-			System.exit(-1);
+			errMsg = e.toString();
+			logger.severe(errMsg);
+		}finally {
+			processResults();
 		}
+
 
 
 	}
@@ -146,8 +164,9 @@ public class RunCrema implements Runnable {
 		DAGModel model = (DAGModel) IO.readUAI(modelPath);
 		logger.info("Loaded model "+model.getNetwork());
 
-		StopWatch watch = new StopWatch();
+		model = preprocessModel(model);
 
+		StopWatch watch = new StopWatch();
 
 		// Run the warmup iterations
 		for(int i=1; i<=warmups; i++) {
@@ -157,7 +176,6 @@ public class RunCrema implements Runnable {
 			watch.stop();
 			logger.info("Warmup iteration "+i+"/"+warmups+" ("+watch.getTime()+" ms.)");
 		}
-
 
 		// Run the measurable experiments
 		time = 0L;
@@ -171,6 +189,7 @@ public class RunCrema implements Runnable {
 
 		}
 
+		/*
 		// If needed, run the exact
 		if(measureError) {
 			exactResult = result;
@@ -186,6 +205,19 @@ public class RunCrema implements Runnable {
 			}
 		}
 
+		 */
+
+	}
+
+	private DAGModel preprocessModel(DAGModel model) {
+		if(method != InferenceMethod.intervallp)
+			return model;
+		DAGModel imodel = model.copy();
+		for(int x : imodel.getVariables())
+			imodel.setFactor(x, (new VertexToInterval()).apply((VertexFactor) model.getFactor(x), x));
+
+		return imodel;
+
 	}
 
 	private GenericFactor evaluate(DAGModel model, InferenceMethod method) throws InterruptedException {
@@ -197,11 +229,12 @@ public class RunCrema implements Runnable {
 			// Set convex hull
 			if(CH_METHODS.keySet().contains(method))
 				((CredalVariableElimination)inf).setConvexHullMarg(CH_METHODS.get(method));
-		}else if(method==InferenceMethod.approxlp){
+		}else if(LP_METHODS.contains(method)){
 			inf = new CredalApproxLP(model);
+		}else{
+			throw new IllegalArgumentException("Unknown inference method");
+
 		}
-
-
 
 		TIntIntHashMap evid = new TIntIntHashMap();
 		if(observed != -1)
@@ -216,9 +249,46 @@ public class RunCrema implements Runnable {
 
 	private void processResults(){
 		logger.info("Processing results");
+
+		String msg = "results=dict(";
+
+		ArrayList<String> results = new ArrayList<>();
+
+		if(errMsg.length()==0) {
+			if (measureTime)
+				results.add("time=" + (((float) time) / runs));
+
+			IntervalFactor iresult = null;
+			if (result instanceof IntervalFactor) {
+				iresult = (IntervalFactor) result;
+			} else if (result instanceof VertexFactor) {
+				iresult = new VertexToInterval().apply((VertexFactor) result, target);
+			} else {
+				throw new IllegalStateException("Cannot convert results");
+			}
+
+			int cardTarget = iresult.getDomain().getCombinations();
+
+			IntervalFactor finalIresult = iresult;
+			results.add(
+					"post=[" + String.join(",",
+							IntStream.range(0, cardTarget)
+									.mapToObj(i -> finalIresult.getLower(0)[i] + "," + finalIresult.getUpper(0)[i])
+									.toArray(String[]::new)) + "]");
+		}else{
+			results.add("err_msg='"+errMsg+"'");
+		}
+
+		results.add("arg_str='"+argStr+"'");
+		msg+=String.join(",",results.toArray(String[]::new));
+		msg+=")";
+		logger.info(msg);
+
 	}
 
 	private void setUp(){
+
+		util.disableWarning();
 
 		logger = Logger.getLogger("MyLog");
 		FileHandler fh = null;
