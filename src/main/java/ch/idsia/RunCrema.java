@@ -43,7 +43,7 @@ public class RunCrema implements Runnable {
 
 	private GenericFactor result;
 //	private GenericFactor exactResult;
-	private Long time;
+	private Long time = 0L;
 
 	private static String errMsg = "";
 
@@ -254,10 +254,11 @@ public class RunCrema implements Runnable {
 
 		ArrayList<String> results = new ArrayList<>();
 
-		if(errMsg.length()==0) {
 			if (measureTime)
 				results.add("time=" + (((float) time) / runs));
 
+
+		if(errMsg.length()==0) {
 			IntervalFactor iresult = null;
 			if (result instanceof IntervalFactor) {
 				iresult = (IntervalFactor) result;
@@ -275,8 +276,11 @@ public class RunCrema implements Runnable {
 							IntStream.range(0, cardTarget)
 									.mapToObj(i -> finalIresult.getLower(0)[i] + "," + finalIresult.getUpper(0)[i])
 									.toArray(String[]::new)) + "]");
+
+			results.add("err_msg=''");
 		}else{
 			results.add("err_msg='"+errMsg+"'");
+			results.add("post=None");
 		}
 
 		results.add("arg_str='"+argStr+"'");
