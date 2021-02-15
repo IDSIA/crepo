@@ -283,6 +283,7 @@ public class RunCrema implements Runnable {
 		msg+=String.join(",",results.toArray(String[]::new));
 		msg+=")";
 		logger.info(msg);
+		System.out.println(msg);
 
 	}
 
