@@ -9,6 +9,7 @@ import ch.idsia.crema.inference.Inference;
 import ch.idsia.crema.inference.approxlp.CredalApproxLP;
 import ch.idsia.crema.inference.ve.CredalVariableElimination;
 import ch.idsia.crema.model.graphical.DAGModel;
+import ch.idsia.crema.utility.InvokerWithTimeout;
 import ch.idsia.crema.utility.hull.ConvexHull;
 import ch.idsia.experiments.Convert;
 import ch.javasoft.util.ints.IntHashMap;
@@ -22,6 +23,8 @@ import javax.sound.midi.Soundbank;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 import java.util.logging.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -110,6 +113,9 @@ public class RunCrema implements Runnable {
 	}
 	private int runs = 1;
 
+	@Option(names = {"-T", "--timeout"}, description = "Timeout in seconds. Default is 3600.")
+	private long timeout = 3600;
+
 	@Option(names={"-l", "--log"}, description = "Log file path. If not specified, messages are shown on standard output.")
 	String logFile;
 
@@ -157,7 +163,7 @@ public class RunCrema implements Runnable {
 
 	}
 
-	private void experiments() throws IOException, InterruptedException {
+	private void experiments() throws IOException, InterruptedException, TimeoutException, ExecutionException {
 		logger.info("Starting experiments");
 
 		// Load the model
@@ -182,6 +188,8 @@ public class RunCrema implements Runnable {
 		for(int i=1; i<=runs; i++) {
 			watch.reset();
 			watch.start();
+
+
 			result = evaluate(model, method);
 			watch.stop();
 			time += watch.getTime();
@@ -220,8 +228,12 @@ public class RunCrema implements Runnable {
 
 	}
 
-	private GenericFactor evaluate(DAGModel model, InferenceMethod method) throws InterruptedException {
-		Inference inf = null;
+	static Inference inf = null;
+	static TIntIntHashMap evid = null;
+	static int targetVar = 0;
+
+	private GenericFactor evaluate(DAGModel model, InferenceMethod method) throws InterruptedException, TimeoutException, ExecutionException {
+
 
 		// Set up the inference engine
 		if(VE_METHODS.contains(method)){
@@ -236,15 +248,19 @@ public class RunCrema implements Runnable {
 
 		}
 
-		TIntIntHashMap evid = new TIntIntHashMap();
+		targetVar = target;
+		evid = new TIntIntHashMap();
 		if(observed != -1)
 			evid.put(observed, 0);
 
-		//if(List.of(inf.getInferenceModel(target, evid).getVariables()).contains(observed))
-		//	return inf.query(target, evid);
+		InvokerWithTimeout<GenericFactor> invoker = new InvokerWithTimeout<>();
+		return invoker.run(RunCrema::queryWithTimeout, timeout);
+		//return inf.query(target, evid);
 
-		return inf.query(target, evid);
+	}
 
+	private static GenericFactor queryWithTimeout() throws InterruptedException {
+		return inf.query(targetVar, evid);
 	}
 
 	private void processResults(){
