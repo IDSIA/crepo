@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+
+
+<!--
+	Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
+	Produced by JavaBayes (http://www.cs.cmu.edu/~javabayes/
+	Number of nodes:9
+	Output created Wed Feb 17 10:47:29 CET 2021
+-->
+
+
+
+<BIF VERSION="0.3">
+<NETWORK>
+<NAME>InternalNetwork</NAME>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node0</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <PROPERTY>position = (15, 390)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node1</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <PROPERTY>position = (15, 150)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node2</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <OUTCOME>state3</OUTCOME>
+    <PROPERTY>position = (135, 164)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node3</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <OUTCOME>state3</OUTCOME>
+    <PROPERTY>position = (45, 30)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node4</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <PROPERTY>position = (165, 44)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node5</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <PROPERTY>position = (255, 150)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node6</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <PROPERTY>position = (285, 30)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node7</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <PROPERTY>position = (375, 135)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node8</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <PROPERTY>position = (495, 149)</PROPERTY>
+</VARIABLE>
+<!-- Probability Distributions -->
+ <DEFINITION>
+      <FOR>node0</FOR>
+      <GIVEN>node3</GIVEN>
+      <GIVEN>node6</GIVEN>
+      <GIVEN>node8</GIVEN>
+     <TABLE>0.3099 0.6004 0.0897 0.2784 0.3711 0.3505 0.0765 0.5134 0.4101 0.2195 0.3616 0.4189 0.2648 0.1694 0.5658 0.2848 0.415 0.3002 0.2782 0.6247 0.0971 0.8184 0.0586 0.123 0.0613 0.2467 0.692 0.1246 0.0186 0.8568 0.3294 0.0392 0.6314 0.6371 0.0957 0.2672 0.6013 0.3188 0.0799 0.1239 0.2597 0.6164 0.1136 0.5668 0.3196 0.0907 0.0506 0.8587 0.2811 0.4992 0.2197 0.5095 0.2559 0.2346 0.0325 0.8831 0.0844 0.4878 0.0927 0.4195 0.4005 0.4721 0.1274 0.4534 0.2052 0.3414 0.7383 0.0094 0.2523 0.2016 0.1526 0.6458 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node1</FOR>
+      <GIVEN>node7</GIVEN>
+     <TABLE>0.6813 0.305 0.0137 0.0637 0.5463 0.39 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node2</FOR>
+      <GIVEN>node4</GIVEN>
+     <TABLE>0.2872 0.0508 0.2775 0.3845 0.0301 0.5942 0.2752 0.1005 0.1451 0.189 0.1911 0.4748 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node3</FOR>
+     <TABLE>0.5006 0.0063 0.1684 0.3247 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node4</FOR>
+     <TABLE>0.0188 0.4106 0.5706 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node5</FOR>
+      <GIVEN>node4</GIVEN>
+     <TABLE>0.0474 0.0576 0.895 0.0217 0.8084 0.1699 0.1939 0.1178 0.6883 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node6</FOR>
+     <TABLE>0.647 0.1205 0.2325 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node7</FOR>
+      <GIVEN>node2</GIVEN>
+     <TABLE>0.8766 0.1234 0.8343 0.1657 0.6154 0.3846 0.2179 0.7821 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node8</FOR>
+      <GIVEN>node4</GIVEN>
+     <TABLE>0.1522 0.8478 0.3927 0.6073 0.1934 0.8066 </TABLE>
+ </DEFINITION>
+</NETWORK>
+</BIF>

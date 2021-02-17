@@ -90,8 +90,8 @@ public class RunCrema implements Runnable {
 	@Option(names = {"-x", "--target"}, required = true, description = "Target variable ID.")
 	private int target;
 
-	@Option(names = {"-y", "--observed"}, description = "Observed variable ID.")
-	private int observed = -1;
+	@Option(names = {"-y", "--observed"}, arity = "0..*", description = "Space-separated list of observed variables IDs.")
+	private int[] observed = new int[]{};
 
 	@Option(names = {"-t", "--time"}, description = "Measure time")
 	private boolean measureTime;
@@ -131,7 +131,7 @@ public class RunCrema implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		argStr = String.join(" ", args);
+		argStr = String.join(";", args);
 		CommandLine.run(new RunCrema(), args);
 		if(errMsg!="")
 			System.exit(-1);
@@ -250,8 +250,9 @@ public class RunCrema implements Runnable {
 
 		targetVar = target;
 		evid = new TIntIntHashMap();
-		if(observed != -1)
-			evid.put(observed, 0);
+		//if(observed != null)
+		for(int y : observed)
+			evid.put(y, 0);
 
 		InvokerWithTimeout<GenericFactor> invoker = new InvokerWithTimeout<>();
 		return invoker.run(RunCrema::queryWithTimeout, timeout);

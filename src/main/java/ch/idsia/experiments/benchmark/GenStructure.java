@@ -9,12 +9,13 @@ import java.util.Map;
 public class GenStructure {
 
     // constant
-    static int nGraphs = 5;
+    static int nGraphs = 3;
     static int maxInducedWidth = 8;
 
     public static void main(String[] args) throws Exception {
         String[] structs = {"singly", "multi"}; // singly (polytree), multi
-        int[] numNodes = {4,6,8,10};
+        //int[] numNodes = {4,6,8,10};
+        int[] numNodes = {5,7,9};
         int[] maxDegree = {6};
         int[] maxInDegree = {2,4,6};
         int[] maxValues = {4}; // binary and ternary variables

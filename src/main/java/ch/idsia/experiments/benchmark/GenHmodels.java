@@ -6,6 +6,7 @@ import ch.idsia.crema.factor.credal.vertex.VertexFactor;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.experiments.Convert;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -24,6 +25,8 @@ public class GenHmodels {
         ArrayList<String> failed = new ArrayList<String>();
         List<String> files = getFiles(vmodelFolder);
 
+        boolean rewrite = false;
+
 
         int i = 1;
         for(String vfile : files) {
@@ -31,15 +34,19 @@ public class GenHmodels {
                 // Load the vmodel
                 System.out.println("Processing "+(i++)+"/"+files.size());
                 System.out.println(vfile);
-                DAGModel vmodel = (DAGModel) IO.read(vfile);
+                String name = vfile.substring(vfile.lastIndexOf("/") + 1).replace("vmodel", "hmodel");
 
-                // Convert the model
-                DAGModel hmodel = buildHmodel(vmodel);
 
-                // Save the hmodel
-                String name = vfile.substring(vfile.lastIndexOf("/")+1).replace("vmodel", "hmodel");
-                System.out.println("Saving " + hmodelFolder + "" + name);
-                IO.writeUAI(hmodel, hmodelFolder + "" + name);
+                if (rewrite || !new File(hmodelFolder + "" + name).exists()) {
+
+                    DAGModel vmodel = (DAGModel) IO.read(vfile);
+                    // Convert the model
+                    DAGModel hmodel = buildHmodel(vmodel);
+
+                    // Save the hmodel
+                    System.out.println("Saving " + hmodelFolder + "" + name);
+                    IO.writeUAI(hmodel, hmodelFolder + "" + name);
+                }
             }catch (Exception e){
                 failed.add(vfile);
                 System.out.println("ERROR: "+vfile);

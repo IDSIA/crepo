@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+
+
+<!--
+	Bayesian network in XMLBIF v0.3 (BayesNet Interchange Format)
+	Produced by JavaBayes (http://www.cs.cmu.edu/~javabayes/
+	Number of nodes:5
+	Output created Wed Feb 17 10:47:29 CET 2021
+-->
+
+
+
+<BIF VERSION="0.3">
+<NETWORK>
+<NAME>InternalNetwork</NAME>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node0</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <OUTCOME>state3</OUTCOME>
+    <PROPERTY>position = (15, 150)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node1</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <PROPERTY>position = (135, 164)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node2</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <PROPERTY>position = (45, 30)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node3</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <OUTCOME>state2</OUTCOME>
+    <OUTCOME>state3</OUTCOME>
+    <PROPERTY>position = (44, 270)</PROPERTY>
+</VARIABLE>
+<!-- Variables -->
+<VARIABLE TYPE="nature">
+    <NAME>node4</NAME>
+    <OUTCOME>state0</OUTCOME>
+    <OUTCOME>state1</OUTCOME>
+    <PROPERTY>position = (165, 44)</PROPERTY>
+</VARIABLE>
+<!-- Probability Distributions -->
+ <DEFINITION>
+      <FOR>node0</FOR>
+      <GIVEN>node2</GIVEN>
+     <TABLE>0.3753 0.0256 0.0534 0.5457 0.5517 0.0642 0.2561 0.128 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node1</FOR>
+      <GIVEN>node3</GIVEN>
+     <TABLE>0.1219 0.7424 0.1357 0.1574 0.0949 0.7477 0.3027 0.5907 0.1066 0.4612 0.246 0.2928 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node2</FOR>
+     <TABLE>0.0416 0.9584 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node3</FOR>
+      <GIVEN>node0</GIVEN>
+      <GIVEN>node4</GIVEN>
+     <TABLE>0.099 0.499 0.358 0.044 0.4047 0.1241 0.1291 0.3421 0.2674 0.1322 0.1743 0.4261 0.07 0.0291 0.3084 0.5925 0.4079 0.2509 0.1784 0.1628 0.3864 0.3916 0.1221 0.0999 0.1453 0.1437 0.7033 0.0077 0.6225 0.0693 0.078 0.2302 </TABLE>
+ </DEFINITION>
+ <DEFINITION>
+      <FOR>node4</FOR>
+     <TABLE>0.7231 0.2769 </TABLE>
+ </DEFINITION>
+</NETWORK>
+</BIF>

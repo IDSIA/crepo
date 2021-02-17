@@ -14,6 +14,7 @@ import com.google.common.collect.Lists;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -36,6 +37,7 @@ public class GenVmodels {
         String vmodelFolder = prj_dir+"/networks/vmodel/";
         int[] nVert = {2, 4, 6};
         //int[] nVert = {4};
+        boolean rewrite = false;
 
 
 
@@ -58,13 +60,15 @@ public class GenVmodels {
                 // get the name of the output uai file
                 String name = getNameFrom(bnetFile, nV);
 
-                // Set always the same seed for a same file, regardless of the order
-                RandomUtil.setRandomSeed(name.hashCode());
+                if (rewrite || !new File(vmodelFolder.toString()+name).exists()) {
+                    // Set always the same seed for a same file, regardless of the order
+                    RandomUtil.setRandomSeed(name.hashCode());
 
-                // generate the new model and write it
-                DAGModel vmodel = buildVmodel(bnet, nV);
-                System.out.println("\nSaving " + vmodelFolder + "" + name);
-                IO.write(vmodel, vmodelFolder + "" + name);
+                    // generate the new model and write it
+                    DAGModel vmodel = buildVmodel(bnet, nV);
+                    System.out.println("\nSaving " + vmodelFolder + "" + name);
+                    IO.write(vmodel, vmodelFolder + "" + name);
+                }
             }
 
 
