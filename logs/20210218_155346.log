@@ -1,0 +1,22 @@
+[2021-02-18_15:53:46][INFO][python] Logging info to /root/dev/2021-SIPTA-crema/logs/20210218_155346.log
+[2021-02-18_15:53:47][INFO][python] Starting experiment 0
+[2021-02-18_15:53:48][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_155346.log
+[2021-02-18_15:53:48][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;3;--timeout=600;vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_155346.log
+[2021-02-18_15:53:48][INFO][java] Starting experiments
+[2021-02-18_15:53:48][SEVERE][java] java.nio.file.NoSuchFileException: vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai
+[2021-02-18_15:53:48][INFO][java] Processing results
+[2021-02-18_15:53:48][INFO][java] results=dict(time=0.0,err_msg='java.nio.file.NoSuchFileException: vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai',interval_result=[],arg_str='-t;--method=cve;-r;1;-w;0;-x;3;--timeout=600;vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_155346.log')
+[2021-02-18_15:53:48][INFO][python] Starting experiment 1
+[2021-02-18_15:53:49][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_155346.log
+[2021-02-18_15:53:49][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;0;-y;3;--timeout=600;vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_155346.log
+[2021-02-18_15:53:49][INFO][java] Starting experiments
+[2021-02-18_15:53:49][SEVERE][java] java.nio.file.NoSuchFileException: vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai
+[2021-02-18_15:53:49][INFO][java] Processing results
+[2021-02-18_15:53:49][INFO][java] results=dict(time=0.0,err_msg='java.nio.file.NoSuchFileException: vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai',interval_result=[],arg_str='-t;--method=cve;-r;1;-w;0;-x;0;-y;3;--timeout=600;vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_155346.log')
+[2021-02-18_15:53:49][INFO][python] Starting experiment 2
+[2021-02-18_15:53:50][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_155346.log
+[2021-02-18_15:53:50][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;4;--timeout=600;vmodel/vmodel-sing_n5_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_155346.log
+[2021-02-18_15:53:50][INFO][java] Starting experiments
+[2021-02-18_15:53:50][SEVERE][java] java.nio.file.NoSuchFileException: vmodel/vmodel-sing_n5_mID2_mD6_mV4_nV2-1.uai
+[2021-02-18_15:53:50][INFO][java] Processing results
+[2021-02-18_15:53:50][INFO][java] results=dict(time=0.0,err_msg='java.nio.file.NoSuchFileException: vmodel/vmodel-sing_n5_mID2_mD6_mV4_nV2-1.uai',interval_result=[],arg_str='-t;--method=cve;-r;1;-w;0;-x;4;--timeout=600;vmodel/vmodel-sing_n5_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_155346.log')

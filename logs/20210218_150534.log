@@ -1,0 +1,25 @@
+[2021-02-18_15:05:34][INFO][python] Logging info to /root/dev/2021-SIPTA-crema/logs/20210218_150534.log
+[2021-02-18_15:05:35][INFO][python] Starting experiment 0
+[2021-02-18_15:05:37][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_150534.log
+[2021-02-18_15:05:37][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;3;--timeout=600;./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_150534.log
+[2021-02-18_15:05:37][INFO][java] Starting experiments
+[2021-02-18_15:05:37][INFO][java] Loaded model ([0, 1, 2, 3], [(0,1), (1,2), (3,2)])
+[2021-02-18_15:05:37][INFO][java] Measurable iteration 1/1 (33 ms.)
+[2021-02-18_15:05:37][INFO][java] Processing results
+[2021-02-18_15:05:37][INFO][java] results=dict(time=33.0,post=[0.048,0.496,0.028,0.154,0.433,0.905],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;3;--timeout=600;./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_150534.log')
+[2021-02-18_15:05:37][INFO][python] Starting experiment 1
+[2021-02-18_15:05:38][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_150534.log
+[2021-02-18_15:05:38][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;0;-y;3;--timeout=600;./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_150534.log
+[2021-02-18_15:05:38][INFO][java] Starting experiments
+[2021-02-18_15:05:38][INFO][java] Loaded model ([0, 1, 2, 3], [(0,1), (1,2), (3,2)])
+[2021-02-18_15:05:38][INFO][java] Measurable iteration 1/1 (31 ms.)
+[2021-02-18_15:05:38][INFO][java] Processing results
+[2021-02-18_15:05:38][INFO][java] results=dict(time=31.0,post=[0.002,0.09500000000000001,0.011,0.834,0.0,0.29200000000000004,0.04200000000000001,0.951],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;0;-y;3;--timeout=600;./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_150534.log')
+[2021-02-18_15:05:38][INFO][python] Starting experiment 2
+[2021-02-18_15:05:39][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_150534.log
+[2021-02-18_15:05:39][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;4;--timeout=600;./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_150534.log
+[2021-02-18_15:05:39][INFO][java] Starting experiments
+[2021-02-18_15:05:39][INFO][java] Loaded model ([0, 1, 2, 3], [(0,1), (1,2), (3,2)])
+[2021-02-18_15:05:39][SEVERE][java] java.util.concurrent.ExecutionException: java.lang.IllegalArgumentException: no such vertex in graph: 4
+[2021-02-18_15:05:39][INFO][java] Processing results
+[2021-02-18_15:05:39][INFO][java] results=dict(time=0.0,err_msg='java.util.concurrent.ExecutionException: java.lang.IllegalArgumentException: no such vertex in graph: 4',post=None,arg_str='-t;--method=cve;-r;1;-w;0;-x;4;--timeout=600;./networks/vmodel/vmodel-mult_n4_mID2_mD6_mV4_nV4-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_150534.log')
