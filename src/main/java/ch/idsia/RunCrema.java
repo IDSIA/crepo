@@ -289,7 +289,7 @@ public class RunCrema implements Runnable {
 
 			IntervalFactor finalIresult = iresult;
 			results.add(
-					"post=[" + String.join(",",
+					"interval_result=[" + String.join(",",
 							IntStream.range(0, cardTarget)
 									.mapToObj(i -> finalIresult.getLower(0)[i] + "," + finalIresult.getUpper(0)[i])
 									.toArray(String[]::new)) + "]");
@@ -297,7 +297,7 @@ public class RunCrema implements Runnable {
 			results.add("err_msg=''");
 		}else{
 			results.add("err_msg='"+errMsg+"'");
-			results.add("post=None");
+			results.add("interval_result=[]");
 		}
 
 		results.add("arg_str='"+argStr+"'");
