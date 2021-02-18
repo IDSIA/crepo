@@ -1,0 +1,15 @@
+18-Feb-21 09:27:41 - This is a debug message
+18-Feb-21 09:27:41 - This is an info message
+18-Feb-21 09:27:41 - This is a warning message
+18-Feb-21 09:27:41 - This is an error message
+18-Feb-21 09:27:41 - This is a critical message
+[18-Feb-21 09:29:49][DEBUG][java] This is a debug message
+[18-Feb-21 09:29:49][INFO][java] This is an info message
+[18-Feb-21 09:29:49][WARNING][java] This is a warning message
+[18-Feb-21 09:29:49][ERROR][java] This is an error message
+[18-Feb-21 09:29:49][CRITICAL][java] This is a critical message
+[18-02-21_09:30:06][DEBUG][java] This is a debug message
+[18-02-21_09:30:06][INFO][java] This is an info message
+[18-02-21_09:30:06][WARNING][java] This is a warning message
+[18-02-21_09:30:06][ERROR][java] This is an error message
+[18-02-21_09:30:06][CRITICAL][java] This is a critical message
