@@ -22,6 +22,9 @@ import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
 public class GenQueries {
+
+	public static boolean checkALP = false;
+
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		ArrayList<String> fail = new ArrayList<>();
@@ -32,14 +35,21 @@ public class GenQueries {
 
 		for(String modelFile : getFiles(modelFolder)) {
 			System.out.println("Reading "+modelFile);
-			String queryStr = getMaximalQuery(modelFile);
-			if(queryStr != null) {
-				System.out.println(queryStr);
-				saveQueryCSV(queryFolder, modelFile, queryStr);
-			}else{
+
+			DAGModel model = (DAGModel) IO.readUAI(modelFile);
+			ArrayList cond = getCondQueries(model);
+			ArrayList marg = getMargQueries(model);
+
+
+
+			if(cond.isEmpty() && marg.isEmpty()){
 				System.out.println("FAILED TO FIND QUERY");
 				fail.add(modelFile);
+			}else{
+				saveQueryCSV(queryFolder, "cond", modelFile, cond);
+				saveQueryCSV(queryFolder, "marg", modelFile, cond);
 			}
+
 		}
 
 		System.out.println("Failed\n==============");
@@ -47,23 +57,61 @@ public class GenQueries {
 
 	}
 
-	public static void saveQueryCSV(String queryFolder, String modelFile, String queryStr) throws FileNotFoundException {
-		String content = "target,observed,size\n";
-		content+=queryStr;
+	public static void saveQueryCSV(String queryFolder,String prefix, String modelFile, ArrayList<String> queries) throws FileNotFoundException {
+
+		if(queries.isEmpty())
+			return;
+
+		String content = "size,target,observed\n";
+		content+= String.join("\n", queries.toArray(String[]::new));
 		content+="\n";
 
 
 		String filename = modelFile.substring(modelFile.lastIndexOf("/"));
 		filename = filename
 				.replace(".uai", ".csv")
-				.replace("vmodel-","query-")
-				.replace("hmodel-","query-");
+				.replace("vmodel-",prefix+"-")
+				.replace("hmodel-",prefix+"-");
 
 		File csvOutputFile = new File(queryFolder+filename);
 		try(PrintWriter pw = new PrintWriter(csvOutputFile)){
 			pw.print(content);
 		}
 	}
+
+
+
+	public static ArrayList<String> getCondQueries(DAGModel model) {
+		TIntIntHashMap evidence = new TIntIntHashMap();
+		for(int y : model.getLeaves())
+			evidence.put(y,0);
+
+		return getQueriesWith(model, model.getRoots(), evidence);
+	}
+
+	public static ArrayList<String> getMargQueries(DAGModel model) {
+		return getQueriesWith(model, model.getLeaves(), new TIntIntHashMap());
+	}
+
+	public static ArrayList<String> getQueriesWith(DAGModel model, int[] targetVars, TIntIntHashMap evidence){
+		CredalVariableElimination ve = new CredalVariableElimination(model);
+
+		ArrayList[] sizes = IntStream.rangeClosed(0,model.getVariables().length).mapToObj(i-> new ArrayList<String>()).toArray(ArrayList[]::new);
+
+		for(int x : targetVars){
+			int s = ve.getInferenceModel(x, evidence).getVariables().length;
+			String obsStr = String.join(" ",IntStream.of(evidence.keys()).mapToObj(i->""+i).toArray(String[]::new));
+			sizes[s].add(s+","+x+","+obsStr);
+		}
+
+		for(int s=sizes.length-1; s>=0; s--){
+			if(!sizes[s].isEmpty()){
+				return sizes[s];
+			}
+		}
+		return new ArrayList<String>();
+	}
+
 
 	public static String getMaximalQuery(String vmodelPath) throws IOException, InterruptedException {
 		// marginal or conditional query with a maximal inference network
