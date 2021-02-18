@@ -47,7 +47,7 @@ public class GenQueries {
 				fail.add(modelFile);
 			}else{
 				saveQueryCSV(queryFolder, "cond", modelFile, cond);
-				saveQueryCSV(queryFolder, "marg", modelFile, cond);
+				saveQueryCSV(queryFolder, "marg", modelFile, marg);
 			}
 
 		}
