@@ -77,5 +77,4 @@ if __name__ == "__main__":
     save_model(modelname, "model.uai")
 
     res = run_crema("model.uai", target=0)
-    res
 
