@@ -56,6 +56,5 @@ def gettempdir():
 
 def write_file(path, content, binary:bool = False):
     flags = "wb+" if binary else "w+"
-    print(flags)
     with open(Path(path).absolute(), flags) as f:
         f.write(content)
