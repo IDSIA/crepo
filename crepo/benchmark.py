@@ -31,7 +31,7 @@ def download_metadata():
 def get_benchmark_data(reload:bool=False) -> pd.DataFrame:
     if reload: info.local_df = None
     if info.local_df is None:
-        info.local_df = pd.read_csv(io.StringIO(request("data/exact_inference.csv")))
+        info.local_df = pd.read_csv(io.StringIO(request("data/full.csv")))
     return info.local_df
 
 def save_jar(folder: str = None, reload:bool=False):

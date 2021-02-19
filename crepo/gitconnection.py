@@ -19,8 +19,11 @@ class GitConnection(object):
 git_connect = GitConnection()
 
 def request(remote_path:str, decode:bool = True):
-    s = requests.get(git_connect._base_url+remote_path).content
-    return s.decode('utf-8') if decode else s
+    url = git_connect._base_url+remote_path
+    s = requests.get(url)
+    if not s.ok:
+        raise ConnectionError(f"Error downloading {url}. Status code {s.status_code}")
+    return s.content.decode('utf-8') if decode else s.content
 
 def check():
     request = requests.get(git_connect._base_url + "README.md")
