@@ -1,7 +1,5 @@
 import os
 from pathlib import Path
-from datetime import datetime
-
 
 from crepo.gitconnection import request
 from crepo.utils import singleton, write_file, gettempdir, exec_bash
@@ -43,11 +41,18 @@ def save_jar(folder: str = None, reload:bool=False):
         write_file(info.local_jar, content, True)
 
 def get_model(label:str) -> str:
-    return request(label[1:], decode=True)
+    return request(get_filename(label)[1:], decode=True)
+
+def get_filename(label:str) -> str:
+    return info.local_df[info.local_df["label"]==label]["filename"].iloc[0]
+
 
 def save_model(label, filename):
     content = get_model(label)
     write_file(filename, content, False)
+
+
+
 
 
 def run_crema(filename: str, target: int = 0, observed: str = "1", method: str = "cve",
@@ -71,10 +76,11 @@ def run_crema(filename: str, target: int = 0, observed: str = "1", method: str =
 if __name__ == "__main__":
     download_metadata()
     data = get_benchmark_data()
-    modelname = data.iloc[0]["filename"]
+
+    modelname = data.iloc[0]["label"]
+
     print(get_model(modelname))
 
     save_model(modelname, "model.uai")
 
     res = run_crema("model.uai", target=0)
-
