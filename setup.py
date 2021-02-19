@@ -14,7 +14,7 @@ if sys.version_info < (3, 4):
 here = os.path.dirname(os.path.abspath(__file__))
 
 # open __init__.py, where version is specified
-with open(os.path.join(here, 'cremabenckmark', '__init__.py')) as f:
+with open(os.path.join(here, 'crepo', '__init__.py')) as f:
     txt = f.read()
 
 # try to read it from source code
@@ -38,13 +38,13 @@ def get_requirements(*files):
 
 
 setup(
-    name='cremabenchmark',
+    name='crepo',
     version=version,
-    description='Bencharmk for inference of credal networks.',
-    long_description='Bencharmk for inference of credal networks.',
+    description='Benchmark for inference of credal networks.',
+    long_description='Benchmark for inference of credal networks.',
     #long_description_content_type="text/markdown",
-    author='Rafael Cabañas',
-    author_email="rcabanas@idsia.ch",
+    author='Rafael Cabañas, Alessandro Antonucci',
+    author_email="rcabanas@idsia.ch, alessandro@antonucci.ch",
     url='',
     #download_url='https://github.com/.../archive/{}.tar.gz'.format(version),
     keywords='credal networks',
@@ -57,7 +57,7 @@ setup(
                  'Operating System :: MacOS :: MacOS X',
                  'Operating System :: Microsoft :: Windows',
                  'Programming Language :: Python :: 3.4'],
-    packages=['cremabenchmark'],
+    packages=['crepo'],
     python_requires='>=3.5',
     install_requires=get_requirements('requirements/install.txt'),
     # extras_require={
