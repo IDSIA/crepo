@@ -1,0 +1,3 @@
+num_vert,max_degree,max_indegree,max_values,nodes,method,kind,query_type,filename,target,observed,barren,interval_result,time
+2,6,2,4,4,cve,sing,marg,./networks/vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai,3,,0,0.476609993 0.614758876376 0.385241123624 0.523390007,53.0
+2,6,2,4,4,cve,sing,cond,./networks/vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai,0,3,0,0.21158887521400385 0.31777107907580027 0.46768068370950255 0.6384243669543201 0.05671049889741206 0.2693091294252906 0.010565563603468645 0.0553632024719982,51.0

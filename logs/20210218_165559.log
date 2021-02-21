@@ -1,0 +1,87 @@
+[2021-02-18_16:55:59][INFO][python] Logging info to /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:01][INFO][python] Starting experiment 0 out of 377
+[2021-02-18_16:56:02][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:02][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;3;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:02][INFO][java] Starting experiments
+[2021-02-18_16:56:02][INFO][java] Loaded model ([0, 1, 2, 3], [(0,1), (1,2), (2,3)])
+[2021-02-18_16:56:02][INFO][java] Measurable iteration 1/1 (46 ms.)
+[2021-02-18_16:56:02][INFO][java] Processing results
+[2021-02-18_16:56:02][INFO][java] results=dict(time=46.0,interval_result=[0.476609993,0.614758876376,0.385241123624,0.523390007],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;3;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log')
+[2021-02-18_16:56:02][INFO][python] Results saved to /root/dev/2021-SIPTA-crema/results/tmp/20210218_165559.csv
+[2021-02-18_16:56:02][INFO][python] Starting experiment 1 out of 377
+[2021-02-18_16:56:03][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:03][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;0;-y;3;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:03][INFO][java] Starting experiments
+[2021-02-18_16:56:03][INFO][java] Loaded model ([0, 1, 2, 3], [(0,1), (1,2), (2,3)])
+[2021-02-18_16:56:03][INFO][java] Measurable iteration 1/1 (57 ms.)
+[2021-02-18_16:56:03][INFO][java] Processing results
+[2021-02-18_16:56:03][INFO][java] results=dict(time=57.0,interval_result=[0.21158887521400385,0.31777107907580027,0.46768068370950255,0.6384243669543201,0.05671049889741206,0.2693091294252906,0.010565563603468645,0.0553632024719982],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;0;-y;3;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n4_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log')
+[2021-02-18_16:56:03][INFO][python] Results saved to /root/dev/2021-SIPTA-crema/results/tmp/20210218_165559.csv
+[2021-02-18_16:56:03][INFO][python] Starting experiment 2 out of 377
+[2021-02-18_16:56:04][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:04][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;4;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n5_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:04][INFO][java] Starting experiments
+[2021-02-18_16:56:04][INFO][java] Loaded model ([0, 1, 2, 3, 4], [(0,1), (1,2), (2,3), (3,4)])
+[2021-02-18_16:56:04][INFO][java] Measurable iteration 1/1 (133 ms.)
+[2021-02-18_16:56:04][INFO][java] Processing results
+[2021-02-18_16:56:04][INFO][java] results=dict(time=133.0,interval_result=[0.139525240230232,0.40904841081014,0.23385172573637,0.641950949722884,0.12303928458006001,0.5277107544401599],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;4;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n5_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log')
+[2021-02-18_16:56:04][INFO][python] Results saved to /root/dev/2021-SIPTA-crema/results/tmp/20210218_165559.csv
+[2021-02-18_16:56:04][INFO][python] Starting experiment 3 out of 377
+[2021-02-18_16:56:05][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:05][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;0;-y;4;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n5_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:05][INFO][java] Starting experiments
+[2021-02-18_16:56:05][INFO][java] Loaded model ([0, 1, 2, 3, 4], [(0,1), (1,2), (2,3), (3,4)])
+[2021-02-18_16:56:06][INFO][java] Measurable iteration 1/1 (207 ms.)
+[2021-02-18_16:56:06][INFO][java] Processing results
+[2021-02-18_16:56:06][INFO][java] results=dict(time=207.0,interval_result=[0.08881519367445478,0.4106994478634178,0.20732277663754944,0.6987817526272669,0.20153561498384626,0.4244924529047827],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;0;-y;4;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n5_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log')
+[2021-02-18_16:56:06][INFO][python] Results saved to /root/dev/2021-SIPTA-crema/results/tmp/20210218_165559.csv
+[2021-02-18_16:56:06][INFO][python] Starting experiment 4 out of 377
+[2021-02-18_16:56:07][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:07][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;5;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n6_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:07][INFO][java] Starting experiments
+[2021-02-18_16:56:07][INFO][java] Loaded model ([0, 1, 2, 3, 4, 5], [(0,1), (1,2), (2,3), (3,4), (4,5)])
+[2021-02-18_16:56:07][INFO][java] Measurable iteration 1/1 (127 ms.)
+[2021-02-18_16:56:07][INFO][java] Processing results
+[2021-02-18_16:56:07][INFO][java] results=dict(time=127.0,interval_result=[0.06913445655785863,0.6015031986195333,0.09165834101998299,0.6655125442856715,0.0743771171688254,0.44464003272537717,0.031712064828787356,0.254666391736042],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;5;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n6_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log')
+[2021-02-18_16:56:07][INFO][python] Results saved to /root/dev/2021-SIPTA-crema/results/tmp/20210218_165559.csv
+[2021-02-18_16:56:07][INFO][python] Starting experiment 5 out of 377
+[2021-02-18_16:56:08][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:08][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;0;-y;5;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n6_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:08][INFO][java] Starting experiments
+[2021-02-18_16:56:08][INFO][java] Loaded model ([0, 1, 2, 3, 4, 5], [(0,1), (1,2), (2,3), (3,4), (4,5)])
+[2021-02-18_16:56:08][INFO][java] Measurable iteration 1/1 (235 ms.)
+[2021-02-18_16:56:08][INFO][java] Processing results
+[2021-02-18_16:56:08][INFO][java] results=dict(time=235.0,interval_result=[0.09281719321700743,0.8586191822095642,0.0970174160833891,0.25677152270613585,0.012266859587267991,0.5693372306146309,0.03054698992708289,0.17116293803024737],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;0;-y;5;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n6_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log')
+[2021-02-18_16:56:08][INFO][python] Results saved to /root/dev/2021-SIPTA-crema/results/tmp/20210218_165559.csv
+[2021-02-18_16:56:08][INFO][python] Starting experiment 6 out of 377
+[2021-02-18_16:56:09][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:09][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;6;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n7_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:09][INFO][java] Starting experiments
+[2021-02-18_16:56:09][INFO][java] Loaded model ([0, 1, 2, 3, 4, 5, 6], [(0,1), (1,2), (2,3), (3,4), (4,5), (5,6)])
+[2021-02-18_16:56:10][INFO][java] Measurable iteration 1/1 (745 ms.)
+[2021-02-18_16:56:10][INFO][java] Processing results
+[2021-02-18_16:56:10][INFO][java] results=dict(time=745.0,interval_result=[0.32631357354504925,0.8655622137396267,0.1344377862603735,0.673686426454951],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;6;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n7_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log')
+[2021-02-18_16:56:10][INFO][python] Results saved to /root/dev/2021-SIPTA-crema/results/tmp/20210218_165559.csv
+[2021-02-18_16:56:10][INFO][python] Starting experiment 7 out of 377
+[2021-02-18_16:56:11][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:11][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;0;-y;6;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n7_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:11][INFO][java] Starting experiments
+[2021-02-18_16:56:11][INFO][java] Loaded model ([0, 1, 2, 3, 4, 5, 6], [(0,1), (1,2), (2,3), (3,4), (4,5), (5,6)])
+[2021-02-18_16:56:12][INFO][java] Measurable iteration 1/1 (956 ms.)
+[2021-02-18_16:56:12][INFO][java] Processing results
+[2021-02-18_16:56:12][INFO][java] results=dict(time=956.0,interval_result=[0.06488227581822582,0.7364474616501411,0.2635525383498589,0.9351177241817742],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;0;-y;6;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n7_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log')
+[2021-02-18_16:56:12][INFO][python] Results saved to /root/dev/2021-SIPTA-crema/results/tmp/20210218_165559.csv
+[2021-02-18_16:56:12][INFO][python] Starting experiment 8 out of 377
+[2021-02-18_16:56:13][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:13][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;7;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n8_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:13][INFO][java] Starting experiments
+[2021-02-18_16:56:13][INFO][java] Loaded model ([0, 1, 2, 3, 4, 5, 6, 7], [(0,1), (1,2), (2,3), (3,4), (4,5), (5,6), (6,7)])
+[2021-02-18_16:56:15][INFO][java] Measurable iteration 1/1 (1581 ms.)
+[2021-02-18_16:56:15][INFO][java] Processing results
+[2021-02-18_16:56:15][INFO][java] results=dict(time=1581.0,interval_result=[0.017249948513106902,0.46850626627645087,0.062450810694004454,0.7102981473339223,0.04845598157947407,0.5442871133870856,0.016050915869178433,0.27795070370338143],err_msg='',arg_str='-t;--method=cve;-r;1;-w;0;-x;7;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n8_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log')
+[2021-02-18_16:56:15][INFO][python] Results saved to /root/dev/2021-SIPTA-crema/results/tmp/20210218_165559.csv
+[2021-02-18_16:56:15][INFO][python] Starting experiment 9 out of 377
+[2021-02-18_16:56:16][INFO][java] Saving log to: /root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:16][INFO][java] Input args: -t;--method=cve;-r;1;-w;0;-x;0;-y;7;--timeout=600;/root/dev/2021-SIPTA-crema/networks/vmodel/vmodel-sing_n8_mID2_mD6_mV4_nV2-1.uai;--log=/root/dev/2021-SIPTA-crema/logs/20210218_165559.log
+[2021-02-18_16:56:16][INFO][java] Starting experiments
+[2021-02-18_16:56:16][INFO][java] Loaded model ([0, 1, 2, 3, 4, 5, 6, 7], [(0,1), (1,2), (2,3), (3,4), (4,5), (5,6), (6,7)])
