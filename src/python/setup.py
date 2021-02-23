@@ -38,7 +38,7 @@ def get_requirements(*files):
 
 
 setup(
-    name='crepo',
+    name='crepobenchmark',
     version=version,
     description='Benchmark for inference of credal networks.',
     long_description='Benchmark for inference of credal networks.',
@@ -57,7 +57,7 @@ setup(
                  'Operating System :: MacOS :: MacOS X',
                  'Operating System :: Microsoft :: Windows',
                  'Programming Language :: Python :: 3.4'],
-    packages=['crepo'],
+    packages=['crepobenchmark'],
     python_requires='>=3.5',
     install_requires=get_requirements('requirements/install.txt'),
     # extras_require={
