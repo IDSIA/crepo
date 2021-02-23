@@ -3,22 +3,22 @@ The Python package for CREPO can be installed as follows.
 
 
 ```python
-!pip install git+https://github.com/IDSIA-papers/crepo.git@0.0.1-SNAPSHOT
+!pip install crepobenchmark
 ```
 
 Import the package and then repository is loaded.
 
 
 ```python
-import crepo
-crepo.download_metadata()
+import crepobenchmark as crb
+crb.download_metadata()
 ```
 
 Access to the benchmark data:
 
 
 ```python
-data = crepo.get_benchmark_data()
+data = crb.get_benchmark_data()
 data
 ```
 
@@ -257,8 +257,8 @@ The specification of any of the models in UAI format can be obtained as follows.
 
 
 ```python
-    modelname = data.iloc[0]["label"]
-    print(crepo.get_model(modelname))
+    modelname = "vs_n4_mID2_mD6_mV4_nV2-1"
+    print(crb.get_model(modelname))
 ```
 
     V-CREDAL
@@ -313,7 +313,7 @@ This specification can also be saved into a file:
 
 
 ```python
-crepo.save_model(modelname, "model.uai")
+crb.save_model(modelname, "model.uai")
 !ls -l | grep model
 ```
 
@@ -324,7 +324,7 @@ Finally, an inference task can be done by invoking Crema:
 
 
 ```python
-crepo.run_crema("model.uai", target=0, method="cve")
+crb.run_crema("model.uai", target=0, method="cve")
 ```
 
 
