@@ -59,7 +59,7 @@ setup(
                  'Programming Language :: Python :: 3.4'],
     packages=['crepobenchmark'],
     python_requires='>=3.5',
-    install_requires=get_requirements('requirements/install.txt'),
+    install_requires=['pandas~=1.1.0'],
     # extras_require={
     #     'gpu': get_requirements('requirements/gpu.txt'),
     #     'visualization': get_requirements('requirements/visualization.txt'),
