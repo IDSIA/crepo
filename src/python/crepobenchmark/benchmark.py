@@ -36,7 +36,7 @@ def save_jar(folder: str = None, reload:bool=False):
     if reload: info.local_jar = None
     if info.local_jar is None:
         folder = folder or gettempdir()
-        content = request("updater/lib/crepo.jar?raw=true", False)
+        content = request("src/java/lib/crepo.jar?raw=true", False)
         info.local_jar = os.path.join(Path(folder), Path(f"crepo.jar"))
         write_file(info.local_jar, content, True)
 
