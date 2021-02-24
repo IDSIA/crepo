@@ -4,7 +4,7 @@
 .settings/
 
 # Intellij
-.idea/
+*/*.idea/
 *.iml
 *.iws
 
@@ -28,6 +28,6 @@ target/
 *__pycache__/
 
 
-*/*model.uai
-
-
+**/model.uai
+**/dist/
+**/.idea/
