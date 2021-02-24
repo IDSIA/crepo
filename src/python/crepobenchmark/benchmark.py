@@ -52,7 +52,24 @@ def save_model(label, filename):
     write_file(filename, content, False)
 
 
+def describe():
 
+    model_features = ['num_vert', 'max_degree', 'max_indegree', 'max_values',
+                      'nodes', 'method', 'kind', 'query_type']
+    data = info.local_df
+
+    descr = [dict(property=f, value=list(pd.unique(data[f])))
+             for f in model_features]
+
+    vmodels = pd.unique(data[data["label"].str.startswith("v")]["label"]).shape[0]
+    hmodels = pd.unique(data[data["label"].str.startswith("h")]["label"]).shape[0]
+
+    descr.append(dict(property="V-models", value=vmodels))
+    descr.append(dict(property="H-models", value=hmodels))
+    descr.append(dict(property="rows", value=len(data)))
+    descr.append(dict(property="columns", value=data.shape[-1]))
+
+    return pd.DataFrame(descr)
 
 
 def run_crema(filename: str, target: int = 0, observed: str = "1", method: str = "cve",
