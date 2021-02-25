@@ -64,12 +64,32 @@ def describe():
     vmodels = pd.unique(data[data["label"].str.startswith("v")]["label"]).shape[0]
     hmodels = pd.unique(data[data["label"].str.startswith("h")]["label"]).shape[0]
 
-    descr.append(dict(property="V-models", value=vmodels))
-    descr.append(dict(property="H-models", value=hmodels))
+    descr.append(dict(property="Vmodels", value=vmodels))
+    descr.append(dict(property="Hmodels", value=hmodels))
     descr.append(dict(property="rows", value=len(data)))
     descr.append(dict(property="columns", value=data.shape[-1]))
 
-    return pd.DataFrame(descr)
+
+    df = pd.DataFrame(descr)
+
+    text_descr = dict(
+        num_vert = "Number of vertices in the credal sets. It is always 2 for binary variables.",
+        max_degree = "Maximum arc degree in the model.",
+        max_indegree = "Maximum arc indegree in the model.",
+        max_values = "Maximum cardinality plus 1",
+        nodes = "Number of nodes in the model.",
+        method = "Inference method.",
+        kind = "Topology of the DAG: singly or multy connected.",
+        query_type = "Marginal or conditional query.",
+        Vmodels = "Count of models with a vertex specification.",
+        Hmodels = "Count of models with a linear constraints specification",
+        rows = "Number of rows in the current benchmarking data.",
+        columns = "Number of rows in the current benchmarking data.",
+        )
+
+
+    df["description"] = df.apply(lambda t:  text_descr[t["property"]], axis=1)
+    return df
 
 
 def run_crema(filename: str, target: int = 0, observed: str = "1", method: str = "cve",
