@@ -31,3 +31,4 @@ target/
 **/model.uai
 **/dist/
 **/.idea/
+/src/python/crepobenchmark.egg-info/
