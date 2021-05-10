@@ -9,7 +9,7 @@ from crepobenchmark.utils import singleton
 class GitConnection(object):
 
     def __init__(self):
-        self._base_url = f"https://raw.githubusercontent.com/IDSIA-papers/crepo/{vtag}/"
+        self._base_url = f"https://raw.githubusercontent.com/IDSIA/crepo/{vtag}/"
 
     @property
     def base_url(self):
