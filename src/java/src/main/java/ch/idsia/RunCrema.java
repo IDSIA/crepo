@@ -3,23 +3,21 @@ package ch.idsia;
 import ch.idsia.crema.IO;
 import ch.idsia.crema.factor.GenericFactor;
 import ch.idsia.crema.factor.convert.VertexToInterval;
-import ch.idsia.crema.factor.credal.linear.IntervalFactor;
-import ch.idsia.crema.factor.credal.vertex.VertexFactor;
+import ch.idsia.crema.factor.credal.linear.interval.IntervalFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexDefaultFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
 import ch.idsia.crema.inference.Inference;
 import ch.idsia.crema.inference.approxlp.CredalApproxLP;
 import ch.idsia.crema.inference.ve.CredalVariableElimination;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.utility.InvokerWithTimeout;
 import ch.idsia.crema.utility.hull.ConvexHull;
-import ch.idsia.experiments.Convert;
-import ch.javasoft.util.ints.IntHashMap;
 import gnu.trove.map.hash.TIntIntHashMap;
 import org.apache.commons.lang3.time.StopWatch;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import javax.sound.midi.Soundbank;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -27,7 +25,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.*;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 
 /*
@@ -71,10 +68,10 @@ public class RunCrema implements Runnable {
 			InferenceMethod.cve_ch5,
 			InferenceMethod.cve_ch10
 	);
-	private static Map<InferenceMethod, ConvexHull.Method> CH_METHODS = Map.ofEntries(
-			Map.entry(InferenceMethod.cve_ch, ConvexHull.Method.LP_CONVEX_HULL),
-			Map.entry(InferenceMethod.cve_ch5, ConvexHull.Method.REDUCED_HULL_5),
-			Map.entry(InferenceMethod.cve_ch10, ConvexHull.Method.REDUCED_HULL_10)
+	private static Map<InferenceMethod, ConvexHull> CH_METHODS = Map.ofEntries(
+			Map.entry(InferenceMethod.cve_ch, ConvexHull.LP_CONVEX_HULL),
+			Map.entry(InferenceMethod.cve_ch5, ConvexHull.REDUCED_HULL_5),
+			Map.entry(InferenceMethod.cve_ch10, ConvexHull.REDUCED_HULL_10)
 	);
 
 
@@ -222,37 +219,39 @@ public class RunCrema implements Runnable {
 			return model;
 		DAGModel imodel = model.copy();
 		for(int x : imodel.getVariables())
-			imodel.setFactor(x, (new VertexToInterval()).apply((VertexFactor) model.getFactor(x), x));
+			imodel.setFactor(x, (new VertexToInterval()).apply((VertexDefaultFactor) model.getFactor(x), x));
 
 		return imodel;
 
 	}
 
 	static Inference inf = null;
-	static TIntIntHashMap evid = null;
-	static int targetVar = 0;
+	static TIntIntHashMap queryEvid = null;
+	static int queryVar = 0;
+	static DAGModel queryDAGmodel = null;
 
 	private GenericFactor evaluate(DAGModel model, InferenceMethod method) throws InterruptedException, TimeoutException, ExecutionException {
 
 
 		// Set up the inference engine
 		if(VE_METHODS.contains(method)){
-			inf = new CredalVariableElimination(model);
+			inf = new CredalVariableElimination();
 			// Set convex hull
 			if(CH_METHODS.keySet().contains(method))
 				((CredalVariableElimination)inf).setConvexHullMarg(CH_METHODS.get(method));
 		}else if(LP_METHODS.contains(method)){
-			inf = new CredalApproxLP(model);
+			inf = new CredalApproxLP();
 		}else{
 			throw new IllegalArgumentException("Unknown inference method");
 
 		}
 
-		targetVar = target;
-		evid = new TIntIntHashMap();
+		queryVar = target;
+		queryEvid = new TIntIntHashMap();
+		queryDAGmodel = model;
 		//if(observed != null)
 		for(int y : observed)
-			evid.put(y, 0);
+			queryEvid.put(y, 0);
 
 		InvokerWithTimeout<GenericFactor> invoker = new InvokerWithTimeout<>();
 		return invoker.run(RunCrema::queryWithTimeout, timeout);
@@ -261,7 +260,7 @@ public class RunCrema implements Runnable {
 	}
 
 	private static GenericFactor queryWithTimeout() throws InterruptedException {
-		return inf.query(targetVar, evid);
+		return inf.query(queryDAGmodel, queryEvid, queryVar);
 	}
 
 	private void processResults(){

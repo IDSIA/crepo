@@ -3,8 +3,10 @@ package ch.idsia.experiments.benchmark;
 import ch.idsia.crema.IO;
 import ch.idsia.crema.core.Strides;
 import ch.idsia.crema.factor.convert.HalfspaceToVertex;
-import ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor;
-import ch.idsia.crema.factor.credal.vertex.VertexFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexDefaultFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactorFactory;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactorUtilities;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.model.io.bif.XMLBIFParser;
 import ch.idsia.crema.utility.RandomUtil;
@@ -140,7 +142,10 @@ public class GenVmodels {
         for (int i = 0; i < data.length; i++) {
             do {
                 System.out.print(".");
-                VertexFactor vfi = VertexFactor.random(leftDomain, nVert, numDecimals, true);
+
+
+                VertexFactor vfi = VertexFactorUtilities.random(leftDomain, Strides.empty(), nVert); // numDecimals
+
                 if (Convert.isConvertible(vfi, leftDomain.getVariables()[0]))
                     data[i] = vfi.getData()[0];
             } while (data[i] == null);
@@ -152,6 +157,9 @@ public class GenVmodels {
 
         }
         // build final factor
-        return new VertexFactor(leftDomain, rightDomain, data);
+        return new VertexDefaultFactor(leftDomain, rightDomain, data);
+
+
+
     }
 }

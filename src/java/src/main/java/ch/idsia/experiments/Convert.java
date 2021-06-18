@@ -1,9 +1,12 @@
 package ch.idsia.experiments;
 
 import ch.idsia.crema.factor.convert.HalfspaceToVertex;
-import ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor;
-import ch.idsia.crema.factor.credal.vertex.VertexFactor;
+import ch.idsia.crema.factor.credal.linear.separate.SeparateHalfspaceDefaultFactor;
+import ch.idsia.crema.factor.credal.linear.separate.SeparateHalfspaceFactor;
+import ch.idsia.crema.factor.credal.linear.separate.SeparateHalfspaceFactorFactory;
 import ch.idsia.crema.core.Strides;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexDefaultFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.utility.ArraysUtil;
 import ch.idsia.util;
@@ -26,11 +29,12 @@ public class Convert {
     public static SeparateHalfspaceFactor vertexToHspace(VertexFactor factor) throws IOException, InterruptedException {
 
 
-        SeparateHalfspaceFactor HF = new SeparateHalfspaceFactor(factor.getDataDomain(), factor.getSeparatingDomain());
+        SeparateHalfspaceFactor HF = SeparateHalfspaceFactorFactory.factory()
+                .domain(factor.getDataDomain(), factor.getSeparatingDomain()).get();
 
         for(int i=0; i<factor.getSeparatingDomain().getCombinations(); i++) {
-            VertexFactor VFi = new VertexFactor(factor.getDataDomain(), Strides.empty(), new double[][][]{factor.getData()[i]});
-            SeparateHalfspaceFactor HFi = Convert.margVertexToHspace(VFi);
+            VertexFactor VFi = new VertexDefaultFactor(factor.getDataDomain(), Strides.empty(), new double[][][]{factor.getData()[i]});
+            SeparateHalfspaceDefaultFactor HFi = (SeparateHalfspaceDefaultFactor) Convert.margVertexToHspace(VFi);
             HF.setLinearProblemAt(i, HFi.getLinearProblemAt(0));
         }
 
@@ -102,7 +106,8 @@ public class Convert {
 
 
         // read generated txt file and build the inequalities
-        SeparateHalfspaceFactor hf = new SeparateHalfspaceFactor(factor.getDomain(), Strides.empty());
+        SeparateHalfspaceDefaultFactor hf = (SeparateHalfspaceDefaultFactor) SeparateHalfspaceFactorFactory.factory()
+                                            .domain(factor.getDomain(), Strides.empty()).get();
 
         //Ax <= b
         for(String l : new BufferedReader(new FileReader(outFile)).lines().toArray(String[]::new)){
@@ -186,7 +191,8 @@ public class Convert {
         double[][] A = (double[][]) out.get(1);
 
         // Define the H-factor
-        SeparateHalfspaceFactor hf = new SeparateHalfspaceFactor(factor.getDomain(), Strides.empty());
+        SeparateHalfspaceFactor hf = SeparateHalfspaceFactorFactory.factory().domain(factor.getDomain(), Strides.empty()).get();
+
 
         for(int i=0; i<A.length; i++)
             hf.addConstraint(A[i], Relationship.EQ, b[i]);

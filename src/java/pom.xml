@@ -19,7 +19,8 @@
         <dependency>
             <groupId>ch.idsia</groupId>
             <artifactId>crema</artifactId>
-            <version>0.1.6-isipta21bm-SNAPSHOT</version>
+            <!--version>0.1.6-isipta21bm-SNAPSHOT</version-->
+            <version>0.2.0</version>
             <scope>compile</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.sis/profiles -->

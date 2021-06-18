@@ -1,11 +1,16 @@
 package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.IO;
-import ch.idsia.crema.factor.credal.linear.IntervalFactor;
+import ch.idsia.crema.factor.credal.linear.interval.IntervalFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
 import ch.idsia.crema.inference.approxlp.CredalApproxLP;
 import ch.idsia.crema.inference.ve.CredalVariableElimination;
 import ch.idsia.crema.model.graphical.DAGModel;
+import ch.idsia.crema.model.graphical.GraphicalModel;
+import ch.idsia.crema.preprocess.CutObserved;
+import ch.idsia.crema.preprocess.RemoveBarren;
 import ch.idsia.crema.utility.ArraysUtil;
+import gnu.trove.map.TIntIntMap;
 import gnu.trove.map.hash.TIntIntHashMap;
 
 import java.io.File;
@@ -94,12 +99,11 @@ public class GenQueries {
 	}
 
 	public static ArrayList<String> getQueriesWith(DAGModel model, int[] targetVars, TIntIntHashMap evidence){
-		CredalVariableElimination ve = new CredalVariableElimination(model);
 
 		ArrayList[] sizes = IntStream.rangeClosed(0,model.getVariables().length).mapToObj(i-> new ArrayList<String>()).toArray(ArrayList[]::new);
 
 		for(int x : targetVars){
-			int s = ve.getInferenceModel(x, evidence).getVariables().length;
+			int s = getInferenceModel(model, evidence, x).getVariables().length;
 			String obsStr = String.join(" ",IntStream.of(evidence.keys()).mapToObj(i->""+i).toArray(String[]::new));
 			sizes[s].add(s+","+x+","+obsStr);
 		}
@@ -117,7 +121,6 @@ public class GenQueries {
 		// marginal or conditional query with a maximal inference network
 
 		DAGModel model = (DAGModel) IO.readUAI(vmodelPath);
-		CredalVariableElimination ve = new CredalVariableElimination(model);
 
 		int target = -1;
 		int maxSize = 0;
@@ -134,7 +137,7 @@ public class GenQueries {
 					TIntIntHashMap evidence = new TIntIntHashMap();
 					if(y!=-1)
 						evidence.put(y,0);
-					int s = ve.getInferenceModel(x, evidence).getVariables().length;
+					int s = getInferenceModel(model, evidence, target).getVariables().length;
 					sizes[s].add(new int[]{x,y});
 
 				}
@@ -172,7 +175,6 @@ public class GenQueries {
 	public static boolean isApproxEval(String vmodelPath, int target, int observed) throws IOException, InterruptedException {
 		String hmodelPath = vmodelPath.replace("vmodel","hmodel");
 		DAGModel hmodel = (DAGModel)IO.read(hmodelPath);
-		CredalApproxLP inf = new CredalApproxLP(hmodel);
 
 		boolean eval = true;
 
@@ -204,6 +206,15 @@ public class GenQueries {
 				).spliterator(), false)
 				.map(f -> f.toString())
 				.collect(Collectors.toList());
+	}
+
+
+	public static GraphicalModel<VertexFactor> getInferenceModel(GraphicalModel<VertexFactor> model, TIntIntMap evidence, int target) {
+		CutObserved<VertexFactor> cutObserved = new CutObserved();
+		GraphicalModel<VertexFactor> infModel = cutObserved.execute(model, evidence);
+		RemoveBarren<VertexFactor> removeBarren = new RemoveBarren();
+		removeBarren.executeInPlace(infModel, evidence, target);
+		return infModel;
 	}
 
 

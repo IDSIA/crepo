@@ -22,8 +22,8 @@ public class Evaluation implements Callable<Boolean> {
 	public Boolean call() throws InterruptedException {
 		boolean eval = true;
 		try {
-			CredalApproxLP inf = new CredalApproxLP(hmodel);
-			inf.query(target, evidence);
+			CredalApproxLP inf = new CredalApproxLP();
+			inf.query(hmodel, evidence, target);
 		}catch (Exception e){
 			//e.printStackTrace();
 			eval = false;
