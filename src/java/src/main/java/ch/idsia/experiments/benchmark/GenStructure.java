@@ -20,7 +20,6 @@ public class GenStructure {
         int[] maxInDegree = {2,4,6};
         int[] maxValues = {4}; // binary and ternary variables
 
-
         for(int n: numNodes){
             for(int mID: maxInDegree){
                 for(int mD: maxDegree){
@@ -32,10 +31,6 @@ public class GenStructure {
                 }
             }
         }
-
-
-
-
     }
 
     public static void generate(String structure, int n, int mID, int mD, int mV) throws Exception {
@@ -52,14 +47,11 @@ public class GenStructure {
         // Set random seed
         System.out.println(param_str.hashCode());
 
-
-
         //// Generation process /////
         // Optional parameters
-        Map kwargs = new HashMap<String, String>();
+        Map<String, String> kwargs = new HashMap<>();
         kwargs.put("maxInducedWidth", String.valueOf(maxInducedWidth));
         kwargs.put("nGraphs", String.valueOf(nGraphs));
-
 
         // start
         gen.generate(structure, mV, baseFileName, format, kwargs);

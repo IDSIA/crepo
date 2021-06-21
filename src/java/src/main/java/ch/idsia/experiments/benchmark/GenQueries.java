@@ -1,11 +1,14 @@
 package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.IO;
-import ch.idsia.crema.factor.credal.linear.IntervalFactor;
-import ch.idsia.crema.inference.approxlp.CredalApproxLP;
-import ch.idsia.crema.inference.ve.CredalVariableElimination;
+import ch.idsia.crema.factor.credal.linear.separate.SeparateHalfspaceFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
 import ch.idsia.crema.model.graphical.DAGModel;
+import ch.idsia.crema.model.graphical.GraphicalModel;
+import ch.idsia.crema.preprocess.CutObserved;
+import ch.idsia.crema.preprocess.RemoveBarren;
 import ch.idsia.crema.utility.ArraysUtil;
+import gnu.trove.map.TIntIntMap;
 import gnu.trove.map.hash.TIntIntHashMap;
 
 import java.io.File;
@@ -13,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +40,9 @@ public class GenQueries {
 		for(String modelFile : getFiles(modelFolder)) {
 			System.out.println("Reading "+modelFile);
 
-			DAGModel model = (DAGModel) IO.readUAI(modelFile);
-			ArrayList cond = getCondQueries(model);
-			ArrayList marg = getMargQueries(model);
-
-
+			DAGModel<VertexFactor> model = IO.readUAI(modelFile); // TODO: check if the type of factor is correct
+			List<String> cond = getCondQueries(model);
+			List<String> marg = getMargQueries(model);
 
 			if(cond.isEmpty() && marg.isEmpty()){
 				System.out.println("FAILED TO FIND QUERY");
@@ -54,10 +56,9 @@ public class GenQueries {
 
 		System.out.println("Failed\n==============");
 		fail.forEach(System.out::println);
-
 	}
 
-	public static void saveQueryCSV(String queryFolder,String prefix, String modelFile, ArrayList<String> queries) throws FileNotFoundException {
+	public static void saveQueryCSV(String queryFolder, String prefix, String modelFile, List<String> queries) throws FileNotFoundException {
 
 		if(queries.isEmpty())
 			return;
@@ -79,9 +80,7 @@ public class GenQueries {
 		}
 	}
 
-
-
-	public static ArrayList<String> getCondQueries(DAGModel model) {
+	public static List<String> getCondQueries(DAGModel<VertexFactor> model) {
 		TIntIntHashMap evidence = new TIntIntHashMap();
 		for(int y : model.getLeaves())
 			evidence.put(y,0);
@@ -89,44 +88,51 @@ public class GenQueries {
 		return getQueriesWith(model, model.getRoots(), evidence);
 	}
 
-	public static ArrayList<String> getMargQueries(DAGModel model) {
+	public static List<String> getMargQueries(DAGModel<VertexFactor> model) {
 		return getQueriesWith(model, model.getLeaves(), new TIntIntHashMap());
 	}
 
-	public static ArrayList<String> getQueriesWith(DAGModel model, int[] targetVars, TIntIntHashMap evidence){
-		CredalVariableElimination ve = new CredalVariableElimination(model);
-
-		ArrayList[] sizes = IntStream.rangeClosed(0,model.getVariables().length).mapToObj(i-> new ArrayList<String>()).toArray(ArrayList[]::new);
+	public static List<String> getQueriesWith(DAGModel<VertexFactor> model, int[] targetVars, TIntIntHashMap evidence){
+		List<ArrayList<String>> sizes = IntStream.rangeClosed(0, model.getVariables().length)
+				.mapToObj(i -> new ArrayList<String>())
+				.collect(Collectors.toList());
 
 		for(int x : targetVars){
-			int s = ve.getInferenceModel(x, evidence).getVariables().length;
+			int s = getInferenceModelSize(model, evidence, x);
 			String obsStr = String.join(" ",IntStream.of(evidence.keys()).mapToObj(i->""+i).toArray(String[]::new));
-			sizes[s].add(s+","+x+","+obsStr);
+			sizes.get(s).add(s + "," + x + "," + obsStr);
 		}
 
-		for(int s=sizes.length-1; s>=0; s--){
-			if(!sizes[s].isEmpty()){
-				return sizes[s];
+		for(int s=sizes.size()-1; s>=0; s--){
+			if(!sizes.get(s).isEmpty()){
+				return sizes.get(s);
 			}
 		}
-		return new ArrayList<String>();
+		return new ArrayList<>();
 	}
 
+	private static int getInferenceModelSize(GraphicalModel<VertexFactor> model, TIntIntMap evidence, int target) {
+		CutObserved<VertexFactor> cutObserved = new CutObserved<>();
+		GraphicalModel<VertexFactor> infModel = cutObserved.execute(model, evidence); // this already makes a copy
+
+		RemoveBarren<VertexFactor> removeBarren = new RemoveBarren<>();
+		removeBarren.executeInPlace(infModel, evidence, target);
+
+		return infModel.getVariables().length;
+	}
 
 	public static String getMaximalQuery(String vmodelPath) throws IOException, InterruptedException {
 		// marginal or conditional query with a maximal inference network
-
-		DAGModel model = (DAGModel) IO.readUAI(vmodelPath);
-		CredalVariableElimination ve = new CredalVariableElimination(model);
+		DAGModel<VertexFactor> model = IO.readUAI(vmodelPath);
 
 		int target = -1;
 		int maxSize = 0;
 		int observed = -1;
 
-
 		//[List(double<x,y>), ... List(double<x,y>), ]
-		ArrayList[] sizes = IntStream.rangeClosed(0,model.getVariables().length).mapToObj(i-> new ArrayList<int[]>()).toArray(ArrayList[]::new);
-
+		List<ArrayList<int[]>> sizes = IntStream.rangeClosed(0, model.getVariables().length)
+				.mapToObj(i-> new ArrayList<int[]>())
+				.collect(Collectors.toList());
 
 		for(int x : model.getVariables()){
 			for(int y: ArraysUtil.append(model.getVariables(), -1)) {
@@ -134,17 +140,16 @@ public class GenQueries {
 					TIntIntHashMap evidence = new TIntIntHashMap();
 					if(y!=-1)
 						evidence.put(y,0);
-					int s = ve.getInferenceModel(x, evidence).getVariables().length;
-					sizes[s].add(new int[]{x,y});
-
+					int s = getInferenceModelSize(model, evidence, x);
+					sizes.get(s).add(new int[]{x,y});
 				}
 			}
 		}
 
-		for(int i = sizes.length-1; i>=0; i--){
+		for(int i = sizes.size()-1; i>=0; i--){
 			System.out.println(i);
 
-			for(Object p : sizes[i]){
+			for(Object p : sizes.get(i)){
 				target = ((int[])p)[0];
 				observed =  ((int[])p)[1];
 				System.out.println(target+"|"+observed);
@@ -156,23 +161,18 @@ public class GenQueries {
 					}
 					queryStr+=","+i;
 
-					System.out.println(maxSize+"/"+model.getVariables().length+" nodes:\t"+queryStr);
+					System.out.println(maxSize + "/" + model.getVariables().length + " nodes:\t" + queryStr);
 					return queryStr;
 				}
-
 			}
 		}
 
 		return null;
-
-
-
 	}
 
 	public static boolean isApproxEval(String vmodelPath, int target, int observed) throws IOException, InterruptedException {
 		String hmodelPath = vmodelPath.replace("vmodel","hmodel");
-		DAGModel hmodel = (DAGModel)IO.read(hmodelPath);
-		CredalApproxLP inf = new CredalApproxLP(hmodel);
+		DAGModel<SeparateHalfspaceFactor> hmodel = IO.read(hmodelPath);
 
 		boolean eval = true;
 
@@ -182,19 +182,15 @@ public class GenQueries {
 
 
 		ExecutorService executorService = Executors.newSingleThreadExecutor();
-		Future<Boolean> future = executorService.submit(new Evaluation(hmodel, target, evidence));
+		Future<Boolean> future = executorService.submit(new Evaluation<>(hmodel, target, evidence));
 		try {
 			eval = future.get(30L, TimeUnit.MINUTES);
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-			eval = false;
-		} catch (TimeoutException e) {
+		} catch (ExecutionException | TimeoutException e) {
 			e.printStackTrace();
 			eval = false;
 		}
 		return eval;
 	}
-
 
 	public static List<String> getFiles(String folder) throws IOException {
 		return StreamSupport
@@ -202,12 +198,9 @@ public class GenQueries {
 						Paths.get(folder),
 						path -> path.toString().endsWith(".uai")
 				).spliterator(), false)
-				.map(f -> f.toString())
+				.map(Path::toString)
 				.collect(Collectors.toList());
 	}
-
-
-
 
 }
 

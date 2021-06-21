@@ -2,23 +2,21 @@ package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.IO;
 import ch.idsia.crema.core.Strides;
-import ch.idsia.crema.factor.convert.HalfspaceToVertex;
-import ch.idsia.crema.factor.credal.linear.SeparateHalfspaceFactor;
-import ch.idsia.crema.factor.credal.vertex.VertexFactor;
+import ch.idsia.crema.factor.bayesian.BayesianFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactorUtilities;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.model.io.bif.XMLBIFParser;
 import ch.idsia.crema.utility.RandomUtil;
-import ch.idsia.crema.utility.hull.LPConvexHull;
 import ch.idsia.experiments.Convert;
-import com.google.common.collect.Lists;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,42 +37,34 @@ public class GenVmodels {
         //int[] nVert = {4};
         boolean rewrite = false;
 
-
-
         List<String> files = getFiles(preciseFolder);
-
-
-
 
         int i = 1;
         for(String bnetFile : files) {
-
             System.out.println(bnetFile);
             //bnetFile = "./networks/precise/bnet-mult_n4_mID2_mD6_mV4-3.xml";
 
             System.out.println("Processing "+(i++)+"/"+files.size());
             System.out.println(bnetFile);
-            DAGModel bnet = readBnet(bnetFile);
+            DAGModel<BayesianFactor> bnet = readBnet(bnetFile);
             System.out.println("Reading "+bnetFile);
             for(int nV : nVert) {
                 // get the name of the output uai file
                 String name = getNameFrom(bnetFile, nV);
 
-                if (rewrite || !new File(vmodelFolder.toString()+name).exists()) {
+                if (rewrite || !new File(vmodelFolder + name).exists()) {
                     // Set always the same seed for a same file, regardless of the order
                     RandomUtil.setRandomSeed(name.hashCode());
 
                     // generate the new model and write it
-                    DAGModel vmodel = buildVmodel(bnet, nV);
+                    DAGModel<VertexFactor> vmodel = buildVmodel(bnet, nV);
                     System.out.println("\nSaving " + vmodelFolder + "" + name);
                     IO.write(vmodel, vmodelFolder + "" + name);
                 }
             }
-
-
         }
-        System.out.println("Done");
 
+        System.out.println("Done");
     }
 
     public static String getNameFrom(String bnetFile, int nVert) {
@@ -89,19 +79,19 @@ public class GenVmodels {
                             Paths.get(folder),
                         path -> path.toString().endsWith(".xml")
                     ).spliterator(), false)
-                    .map(f -> f.toString())
+                    .map(Path::toString)
                     .collect(Collectors.toList());
     }
 
-    public static DAGModel readBnet(String bnetFile) throws SAXException, IOException, ParserConfigurationException {
+    public static DAGModel<BayesianFactor> readBnet(String bnetFile) throws SAXException, IOException, ParserConfigurationException {
         XMLBIFParser parser = new XMLBIFParser();
         FileInputStream fio = new FileInputStream(bnetFile);
-        return (DAGModel) parser.parse(fio);
+        return (DAGModel<BayesianFactor>) parser.parse(fio);
     }
 
-    public static DAGModel buildVmodel(DAGModel bnet, int nVert) throws IOException, InterruptedException {
+    public static DAGModel<VertexFactor> buildVmodel(DAGModel<BayesianFactor> bnet, int nVert) throws IOException, InterruptedException {
         // generate an credal network with the same structure but without factor
-        DAGModel vmodel = new DAGModel();
+        DAGModel<VertexFactor> vmodel = new DAGModel<>();
 
         for(int x : bnet.getVariables()) {
             int cardX = Math.max(bnet.getDomain(x).getCardinality(x), 2);
@@ -112,46 +102,47 @@ public class GenVmodels {
             vmodel.addParents(x, bnet.getParents(x));
             // generate a random
             setRandomVFactor(vmodel, x, nVert);
-
         }
         return vmodel;
     }
 
-    public static void setRandomVFactor(DAGModel vmodel, int x, int nVert) throws IOException, InterruptedException {
-        VertexFactor vf = null;
+    public static void setRandomVFactor(DAGModel<VertexFactor> vmodel, int x, int nVert) {
+        VertexFactor vf;
         if(vmodel.getParents(x).length == 0)
             vf = random(vmodel.getDomain(x), Strides.empty(), nVert, numDecimals, true);
         else
             vf = random(vmodel.getDomain(x), vmodel.getDomain(vmodel.getParents(x)), nVert, numDecimals, true);
 
         vmodel.setFactor(x, vf);
-
-
-
     }
 
-
-    public static VertexFactor random(Strides leftDomain, Strides rightDomain, int nVert, int num_decimals, boolean zero_allowed) throws IOException, InterruptedException {
+    public static VertexFactor random(Strides leftDomain, Strides rightDomain, int nVert, int num_decimals, boolean zero_allowed) {
 
         // array for storing the vertices
-        double data[][][] = new double[rightDomain.getCombinations()][][];
+        final int combinations = rightDomain.getCombinations();
+        double[][][] data = new double[combinations][][];
+        VertexFactor[] vertices = new VertexFactor[data.length];
 
         // generate independently for each parent
-        for (int i = 0; i < data.length; i++) {
+        for (int i = 0; i < combinations; i++) {
+            boolean valid = false;
             do {
                 System.out.print(".");
-                VertexFactor vfi = VertexFactor.random(leftDomain, nVert, numDecimals, true);
-                if (Convert.isConvertible(vfi, leftDomain.getVariables()[0]))
-                    data[i] = vfi.getData()[0];
-            } while (data[i] == null);
-           if(i<data.length-1)
+                VertexFactor vfi = VertexFactorUtilities.random(leftDomain, nVert);
+                if (Convert.isConvertible(vfi, leftDomain.getVariables()[0])) {
+                    vertices[i] = vfi;
+                    valid = true;
+                }
+            } while (!valid);
+           if(i < combinations-1)
                System.out.print("/");
            else
                System.out.print("|");
 
 
         }
+
         // build final factor
-        return new VertexFactor(leftDomain, rightDomain, data);
+        return VertexFactorUtilities.mergeVertices(vertices);
     }
 }
