@@ -3,7 +3,10 @@ package ch.idsia.experiments.benchmark;
 import ch.idsia.crema.IO;
 import ch.idsia.crema.core.Strides;
 import ch.idsia.crema.factor.bayesian.BayesianFactor;
+import ch.idsia.crema.factor.convert.HalfspaceToVertex;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexDefaultFactor;
 import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexFactorFactory;
 import ch.idsia.crema.factor.credal.vertex.separate.VertexFactorUtilities;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.model.io.bif.XMLBIFParser;
@@ -138,7 +141,6 @@ public class GenVmodels {
                System.out.print("/");
            else
                System.out.print("|");
-
 
         }
 

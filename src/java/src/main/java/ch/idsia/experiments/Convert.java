@@ -1,9 +1,11 @@
 package ch.idsia.experiments;
 
 import ch.idsia.crema.factor.convert.HalfspaceToVertex;
+import ch.idsia.crema.factor.credal.linear.separate.SeparateHalfspaceDefaultFactor;
 import ch.idsia.crema.factor.credal.linear.separate.SeparateHalfspaceFactor;
-import ch.idsia.crema.core.Strides;
 import ch.idsia.crema.factor.credal.linear.separate.SeparateHalfspaceFactorFactory;
+import ch.idsia.crema.core.Strides;
+import ch.idsia.crema.factor.credal.vertex.separate.VertexDefaultFactor;
 import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.utility.ArraysUtil;

@@ -2,7 +2,10 @@ package ch.idsia.experiments.benchmark;
 
 import ch.idsia.crema.IO;
 import ch.idsia.crema.factor.credal.linear.separate.SeparateHalfspaceFactor;
+import ch.idsia.crema.factor.credal.linear.interval.IntervalFactor;
 import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
+import ch.idsia.crema.inference.approxlp.CredalApproxLP;
+import ch.idsia.crema.inference.ve.CredalVariableElimination;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.model.graphical.GraphicalModel;
 import ch.idsia.crema.preprocess.CutObserved;

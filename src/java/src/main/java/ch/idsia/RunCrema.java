@@ -244,6 +244,7 @@ public class RunCrema implements Runnable {
 	}
 
 	private void processResults() {
+
 		logger.info("Processing results");
 
 		String msg = "results=dict(";
