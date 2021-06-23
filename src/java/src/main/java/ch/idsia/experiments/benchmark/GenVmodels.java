@@ -38,7 +38,7 @@ public class GenVmodels {
         String vmodelFolder = prj_dir+"/networks/vmodel/";
         int[] nVert = {2, 4, 6};
         //int[] nVert = {4};
-        boolean rewrite = false;
+        boolean rewrite = true;
 
         List<String> files = getFiles(preciseFolder);
 
