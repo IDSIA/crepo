@@ -9,13 +9,12 @@ import ch.idsia.crema.factor.credal.vertex.separate.VertexDefaultFactor;
 import ch.idsia.crema.factor.credal.vertex.separate.VertexFactor;
 import ch.idsia.crema.model.graphical.DAGModel;
 import ch.idsia.crema.utility.ArraysUtil;
+import ch.idsia.crema.utility.GraphUtil;
 import ch.idsia.util;
 import org.apache.commons.math3.optim.linear.Relationship;
 
 import java.io.*;
 import java.nio.file.InvalidPathException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
@@ -25,27 +24,20 @@ public class Convert {
 
     public static String libPath = "./lib/";
 
-
     public static SeparateHalfspaceFactor vertexToHspace(VertexFactor factor) throws IOException, InterruptedException {
 
-
-        SeparateHalfspaceFactor HF = SeparateHalfspaceFactorFactory.factory()
-                .domain(factor.getDataDomain(), factor.getSeparatingDomain()).get();
+        SeparateHalfspaceFactorFactory shff = SeparateHalfspaceFactorFactory.factory().domain(factor.getDomain(), factor.getSeparatingDomain());
 
         for(int i=0; i<factor.getSeparatingDomain().getCombinations(); i++) {
-            VertexFactor VFi = new VertexDefaultFactor(factor.getDataDomain(), Strides.empty(), new double[][][]{factor.getData()[i]});
-            SeparateHalfspaceDefaultFactor HFi = (SeparateHalfspaceDefaultFactor) Convert.margVertexToHspace(VFi);
-            HF.setLinearProblemAt(i, HFi.getLinearProblemAt(0));
+            final VertexFactor VFi = factor.getSingleVertexFactor(i);// TODO: check if this is the desired value
+            SeparateHalfspaceFactor HFi = Convert.margVertexToHspace(VFi);
+            shff.linearProblemAt(i, HFi.getLinearProblemAt(0));
         }
 
-        return HF;
-
+        return shff.get();
     }
 
-
     public static SeparateHalfspaceFactor margVertexToHspace(VertexFactor factor) throws IOException, InterruptedException {
-
-
         if(factor.getSeparatingDomain().getSize()>0)
             throw new IllegalArgumentException("input factor must have no parents");
 
@@ -53,8 +45,6 @@ public class Convert {
 
         if(!new File(polco_jar).exists())
             throw new InvalidPathException(polco_jar, "Polco jar not found");
-
-
 
         int numVert = factor.getData()[0].length;
         int numDim = factor.getDataDomain().getCombinations();
@@ -65,28 +55,25 @@ public class Convert {
                 return lineVertexToHspace(factor);
             } else {
                 throw new IllegalArgumentException("The number of vertices cannot be lower than the cardinality");
-
             }
         }
 
         // build .ext file
-        String extContent = "V-representation\n" +
-                "begin\n"+(numVert)+" "+(numDim+1)+" real\n";
+        StringBuilder extContent = new StringBuilder("V-representation\nbegin\n" + (numVert) + " " + (numDim + 1) + " real\n");
 
         for(double[] v : factor.getData()[0]){
-            extContent += "1"+ DoubleStream.of(v)
-                    .mapToObj(d -> " "+Double.toString(d))
-                    .collect(Collectors.joining())+"\n";
+            extContent.append("1").append(DoubleStream.of(v)
+                    .mapToObj(d -> " " + d)
+                    .collect(Collectors.joining())).append("\n");
         }
 
-        extContent +="end\n";
-        extContent += "hull\n";
-        extContent += "incidence\n";
-
+        extContent.append("end\n");
+        extContent.append("hull\n");
+        extContent.append("incidence\n");
 
         File extFile = File.createTempFile("factor", ".ext");
         FileWriter writer = new FileWriter(extFile);
-        writer.write(extContent);
+        writer.write(extContent.toString());
         writer.close();
 
         // Create output file
@@ -97,17 +84,14 @@ public class Convert {
                 " -kind cdd -in "+extFile.getAbsolutePath()+
                 " -out text "+outFile.getAbsolutePath();
 
-
         Process p = Runtime.getRuntime().exec(cmd);
         p.waitFor();
 
         if(p.exitValue()>0)
             throw new RuntimeException("problem with bash command.");
 
-
         // read generated txt file and build the inequalities
-        SeparateHalfspaceDefaultFactor hf = (SeparateHalfspaceDefaultFactor) SeparateHalfspaceFactorFactory.factory()
-                                            .domain(factor.getDomain(), Strides.empty()).get();
+        SeparateHalfspaceFactorFactory shff = SeparateHalfspaceFactorFactory.factory().domain(factor.getDomain(), Strides.empty());
 
         //Ax <= b
         for(String l : new BufferedReader(new FileReader(outFile)).lines().toArray(String[]::new)){
@@ -122,25 +106,24 @@ public class Convert {
                     A[i - 1] *= -1;
             }
 
-            hf.addConstraint(A, Relationship.LEQ, b);
-
+            shff.constraint(A, Relationship.LEQ, b);
         }
 
         // Non-negativ constraints
         for(int i=0; i<numDim; i++){
             double[] A = new double[numDim];
             A[i] = 1;
-            hf.addConstraint(A, Relationship.GEQ, 0.0);
+            shff.constraint(A, Relationship.GEQ, 0.0);
         }
 
         // normalization constraint
-        hf.addConstraint(
+        shff.constraint(
                 IntStream.range(0,numDim).mapToDouble(i -> 1.0).toArray(),
                 Relationship.EQ,
                 1.0
         );
 
-        return hf;
+        return shff.get();
 
     }
 
@@ -152,14 +135,13 @@ public class Convert {
         if(!new File(py_script).exists())
             throw new InvalidPathException(py_script, "Python script not found");
 
-        String cmd = "python " + py_script;
+        StringBuilder cmd = new StringBuilder("python " + py_script);
 
         for (double[] p : points) {
-            for (int i = 0; i < p.length; i++)
-                cmd += " " + p[i];
+            for (double v : p) cmd.append(" ").append(v);
         }
 
-        Process p = Runtime.getRuntime().exec(cmd);
+        Process p = Runtime.getRuntime().exec(cmd.toString());
         p.waitFor();
 
         if (p.exitValue() > 0)
@@ -168,15 +150,22 @@ public class Convert {
         String output = new BufferedReader(new InputStreamReader(p.getInputStream())).readLine();
 
         // b -A
-        return Stream.of(output.split("\t")).mapToDouble(s -> Double.parseDouble(s)).toArray();
+        return Stream.of(output.split("\t")).mapToDouble(Double::parseDouble).toArray();
+    }
+
+    private static class LineConstraintMatrix {
+        double[][] A;
+        double[] b;
+
+        public LineConstraintMatrix(double[][] a, double[] b) {
+            A = a;
+            this.b = b;
+        }
     }
 
     public static SeparateHalfspaceFactor lineVertexToHspace(VertexFactor factor) throws IOException, InterruptedException {
-
-
         if(factor.getSeparatingDomain().getSize()>0)
             throw new IllegalArgumentException("input factor must have no parents");
-
 
         // Check number of vertices
         int numVert = factor.getData()[0].length;
@@ -186,17 +175,15 @@ public class Convert {
             throw new IllegalArgumentException("Too many vertices");
 
         // Get the constraints
-        List out = getLineConstMatrix(factor.getData()[0]);
-        double[] b = (double[]) out.get(0);
-        double[][] A = (double[][]) out.get(1);
+        LineConstraintMatrix out = getLineConstMatrix(factor.getData()[0]);
+        double[] b = out.b;
+        double[][] A = out.A;
 
         // Define the H-factor
-        SeparateHalfspaceFactor hf = SeparateHalfspaceFactorFactory.factory().domain(factor.getDomain(), Strides.empty()).get();
-
+        SeparateHalfspaceFactorFactory shff = SeparateHalfspaceFactorFactory.factory().domain(factor.getDomain(), Strides.empty());
 
         for(int i=0; i<A.length; i++)
-            hf.addConstraint(A[i], Relationship.EQ, b[i]);
-
+            shff.constraint(A[i], Relationship.EQ, b[i]);
 
         // Bound constraints
         for(int i=0; i<numDim; i++){
@@ -204,27 +191,24 @@ public class Convert {
             Ai[i] = 1;
             double[] bounds = {factor.getData()[0][0][i],factor.getData()[0][1][i]};
             if(bounds[0] != bounds[1]) {
-                hf.addConstraint(Ai, Relationship.GEQ, Math.min(bounds[0], bounds[1]));
-                hf.addConstraint(Ai, Relationship.LEQ, Math.max(bounds[0], bounds[1]));
+                shff.constraint(Ai, Relationship.GEQ, Math.min(bounds[0], bounds[1]));
+                shff.constraint(Ai, Relationship.LEQ, Math.max(bounds[0], bounds[1]));
             }else{
-                hf.addConstraint(Ai, Relationship.EQ, bounds[0]);
+                shff.constraint(Ai, Relationship.EQ, bounds[0]);
             }
         }
 
         // normalization constraint
-        hf.addConstraint(
+        shff.constraint(
                 IntStream.range(0,numDim).mapToDouble(i -> 1.0).toArray(),
                 Relationship.EQ,
                 1.0
         );
 
-
-        return hf;
+        return shff.get();
     }
 
-
-    private static List getLineConstMatrix(double[][] vert) throws IOException, InterruptedException {
-
+    private static LineConstraintMatrix getLineConstMatrix(double[][] vert) throws IOException, InterruptedException {
         // remove constant dimensions
         int[] nonConst =
                 IntStream.range(0, vert[0].length)
@@ -239,15 +223,12 @@ public class Convert {
         double[][] A = new double[numConst][dim];
         double[] b = new double[numConst];
 
-
         for(int s=0; s<numConst; s++) {
             double[] vals =  lstsq(ArraysUtil.sliceColumns(V, s, s + 1));
             b[s] = vals[0];
             double[] A_s = IntStream.range(1,vals.length).mapToDouble(i-> -1*vals[i]).toArray();
-            for(int i=0; i<A_s.length; i++)
-                A[s][i+s] = A_s[i];
+            System.arraycopy(A_s, 0, A[s], s, A_s.length);
         }
-
 
         double[][] Aexp = new double[numConst][vert[0].length];
         for(int i=0; i<A.length; i++){
@@ -256,47 +237,51 @@ public class Convert {
             }
         }
 
-        return Arrays.asList(b, Aexp);
+        return new LineConstraintMatrix(Aexp, b);
     }
 
-    public static DAGModel VmodelToHmodel(DAGModel vmodel) throws IOException, InterruptedException {
+    public static DAGModel<SeparateHalfspaceFactor> VmodelToHmodel(DAGModel<VertexFactor> vmodel) throws IOException, InterruptedException {
 
-        DAGModel hmodel = (DAGModel) vmodel.copy();
+        DAGModel<SeparateHalfspaceFactor> hmodel = new DAGModel<>();
+
+        // copy structure
+        GraphUtil.copy(vmodel.getNetwork(), hmodel.getNetwork());
+
         int[] variables = vmodel.getVariables();
 
         for (int x : variables) {
-            SeparateHalfspaceFactor hf = Convert.vertexToHspace((VertexFactor) vmodel.getFactor(x));
+            SeparateHalfspaceFactor hf = Convert.vertexToHspace(vmodel.getFactor(x));
             hmodel.setFactor(x, hf);
         }
         return hmodel;
     }
 
-    @SuppressWarnings("all")
-    public static DAGModel HmodelToVmodel(DAGModel hmodel) throws IOException, InterruptedException {
+    public static DAGModel<VertexFactor> HmodelToVmodel(DAGModel<SeparateHalfspaceFactor> hmodel) throws IOException, InterruptedException {
 
-        DAGModel vmodel = (DAGModel) hmodel.copy();
+        DAGModel<VertexFactor> vmodel = new DAGModel<>();
+
+        // copy structure
+        GraphUtil.copy(hmodel.getNetwork(), vmodel.getNetwork());
+
         int[] variables = hmodel.getVariables();
 
         for (int x : variables) {
-            VertexFactor vf = (new HalfspaceToVertex()).apply((SeparateHalfspaceFactor) hmodel.getFactor(x), x);
+            VertexFactor vf = new HalfspaceToVertex().apply(hmodel.getFactor(x), x);
             vmodel.setFactor(x, vf);
         }
         return vmodel;
     }
 
-    public static boolean isConvertible(VertexFactor vf, int leftVar) throws IOException, InterruptedException {
+    public static boolean isConvertible(VertexFactor vf, int leftVar) {
         VertexFactor vf2 = null;
         boolean convertible = true;
         try {
             vf2 = new HalfspaceToVertex().apply(Convert.margVertexToHspace(vf), leftVar);
-        }catch (Exception e){
+        } catch (Exception e){
             convertible = false;
         }
 
         return convertible && vf2 != null;
     }
-
-
-
 
 }

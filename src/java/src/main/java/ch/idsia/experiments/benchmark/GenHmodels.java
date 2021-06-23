@@ -9,6 +9,7 @@ import ch.idsia.experiments.Convert;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,26 +23,25 @@ public class GenHmodels {
         String vmodelFolder = prj_dir+"/networks/vmodel/";
         String hmodelFolder = prj_dir+"/networks/hmodel/";
 
-        ArrayList<String> failed = new ArrayList<String>();
+        List<String> failed = new ArrayList<>();
         List<String> files = getFiles(vmodelFolder);
 
         boolean rewrite = false;
-
 
         int i = 1;
         for(String vfile : files) {
             try {
                 // Load the vmodel
-                System.out.println("Processing "+(i++)+"/"+files.size());
+                System.out.println("Processing " + (i++) + "/" + files.size());
                 System.out.println(vfile);
                 String name = vfile.substring(vfile.lastIndexOf("/") + 1).replace("vmodel", "hmodel");
 
-
-                if (rewrite || !new File(hmodelFolder + "" + name).exists()) {
-
-                    DAGModel vmodel = (DAGModel) IO.read(vfile);
+                final File file = new File(hmodelFolder + "" + name);
+                if (rewrite || !file.exists()) {
+                    // TODO: assuming that "vmodel" is for VertexFactor models, and "hmodel" are for SeparateHalfspaceFactor
+                    DAGModel<VertexFactor> vmodel = IO.read(vfile);
                     // Convert the model
-                    DAGModel hmodel = buildHmodel(vmodel);
+                    DAGModel<SeparateHalfspaceFactor> hmodel = buildHmodel(vmodel);
 
                     // Save the hmodel
                     System.out.println("Saving " + hmodelFolder + "" + name);
@@ -57,10 +57,7 @@ public class GenHmodels {
 
         System.out.println("\nFailed:\n===============");
         failed.forEach(System.out::println);
-
-
     }
-
 
     public static List<String> getFiles(String folder) throws IOException {
         return StreamSupport
@@ -68,13 +65,12 @@ public class GenHmodels {
                         Paths.get(folder),
                         path -> path.toString().endsWith(".uai") && path.toString().contains("vmodel-")
                 ).spliterator(), false)
-                .map(f -> f.toString())
+                .map(Path::toString)
                 .collect(Collectors.toList());
     }
 
-
-    public static DAGModel buildHmodel(DAGModel vmodel) throws IOException, InterruptedException {
-        System.out.println("Converting "+vmodel.getVariables().length+" v-factors");
+    public static DAGModel<SeparateHalfspaceFactor> buildHmodel(DAGModel<VertexFactor> vmodel) throws IOException, InterruptedException {
+        System.out.println("Converting " + vmodel.getVariables().length + " v-factors");
         return Convert.VmodelToHmodel(vmodel);
     }
 
