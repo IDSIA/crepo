@@ -1,5 +1,6 @@
 package ch.idsia.experiments.benchmark;
 
+import ch.idsia.RandomUtilities;
 import ch.idsia.crema.IO;
 import ch.idsia.crema.core.Strides;
 import ch.idsia.crema.factor.bayesian.BayesianFactor;
@@ -33,7 +34,7 @@ public class GenVmodels {
     public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException, InterruptedException {
 
         System.out.println("Generating Vmodels");
-        String prj_dir = ".";
+        String prj_dir = "../../";
         String preciseFolder = prj_dir+"/networks/precise/";
         String vmodelFolder = prj_dir+"/networks/vmodel/";
         int[] nVert = {2, 4, 6};
@@ -131,9 +132,11 @@ public class GenVmodels {
             boolean valid = false;
             do {
                 System.out.print(".");
-                VertexFactor vfi = VertexFactorUtilities.random(leftDomain, nVert);
+                //VertexFactor vfi = VertexFactorUtilities.random(leftDomain, nVert);
+                VertexFactor vfi = RandomUtilities.VertexFactorRandom(leftDomain, nVert, numDecimals, true);
+
                 if (Convert.isConvertible(vfi, leftDomain.getVariables()[0])) {
-                    vertices[i] = vfi;
+                    data[i] = vfi.getData()[0];
                     valid = true;
                 }
             } while (!valid);
@@ -144,7 +147,9 @@ public class GenVmodels {
 
         }
 
+
         // build final factor
-        return VertexFactorUtilities.mergeVertices(vertices);
+        return new VertexDefaultFactor(leftDomain, rightDomain, data);
+        //return VertexFactorUtilities.mergeVertices(vertices);
     }
 }

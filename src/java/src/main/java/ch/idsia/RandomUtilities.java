@@ -66,7 +66,6 @@ public class RandomUtilities {
 
 		for (int i = 0; i < data.length; i++) {
 			data[i] = sampleNormalized(left.getCombinations(), num_decimals, zero_allowed);
-			System.out.println(Arrays.toString(data[i]));
 		}
 
 		return new BayesianDefaultFactor(left.concat(right), Doubles.concat(data));
