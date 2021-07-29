@@ -29,10 +29,7 @@ public class Convert {
         SeparateHalfspaceFactorFactory shff = SeparateHalfspaceFactorFactory.factory().domain(factor.getDomain(), factor.getSeparatingDomain());
 
         for(int i=0; i<factor.getSeparatingDomain().getCombinations(); i++) {
-            final VertexFactor VFi = new VertexDefaultFactor(factor.getDataDomain(), Strides.empty(), new double[][][]{factor.getData()[i]});// TODO: check if this is the desired value
-
-
-
+            final VertexFactor VFi = new VertexDefaultFactor(factor.getDataDomain(), Strides.empty(), new double[][][]{factor.getData()[i]});
             SeparateHalfspaceFactor HFi = Convert.margVertexToHspace(VFi);
             shff.linearProblemAt(i, HFi.getLinearProblemAt(0));
         }
@@ -247,6 +244,8 @@ public class Convert {
 
         DAGModel<SeparateHalfspaceFactor> hmodel = new DAGModel<>();
 
+        for(int v: vmodel.getVariables())
+            hmodel.addVariable(v, vmodel.getSize(v));
         // copy structure
         GraphUtil.copy(vmodel.getNetwork(), hmodel.getNetwork());
 
