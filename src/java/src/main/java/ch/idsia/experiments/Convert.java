@@ -29,7 +29,10 @@ public class Convert {
         SeparateHalfspaceFactorFactory shff = SeparateHalfspaceFactorFactory.factory().domain(factor.getDomain(), factor.getSeparatingDomain());
 
         for(int i=0; i<factor.getSeparatingDomain().getCombinations(); i++) {
-            final VertexFactor VFi = factor.getSingleVertexFactor(i);// TODO: check if this is the desired value
+            final VertexFactor VFi = new VertexDefaultFactor(factor.getDataDomain(), Strides.empty(), new double[][][]{factor.getData()[i]});// TODO: check if this is the desired value
+
+
+
             SeparateHalfspaceFactor HFi = Convert.margVertexToHspace(VFi);
             shff.linearProblemAt(i, HFi.getLinearProblemAt(0));
         }

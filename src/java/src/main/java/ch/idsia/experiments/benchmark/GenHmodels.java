@@ -19,14 +19,14 @@ import java.util.stream.StreamSupport;
 public class GenHmodels {
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        String prj_dir = ".";
+        String prj_dir = "../../";
         String vmodelFolder = prj_dir+"/networks/vmodel/";
         String hmodelFolder = prj_dir+"/networks/hmodel/";
 
         List<String> failed = new ArrayList<>();
         List<String> files = getFiles(vmodelFolder);
 
-        boolean rewrite = false;
+        boolean rewrite = true;
 
         int i = 1;
         for(String vfile : files) {
