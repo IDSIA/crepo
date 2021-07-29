@@ -44,7 +44,11 @@ def get_java_version():
 
 def check_java():
     version_str = get_java_version()
-    version = [int(v) for v in version_str.split(".")]
+    try:
+        version = [int(v) for v in version_str.split(".")]
+    except:
+        print("warning: cannot check java version")
+        version = [-1, -1]
     if version[0]<2 and version[1]<12:
         print(f"warning: Crepo is accessing to an old java version ({version_str}), "
               f"you are advised to set the path to a newer one.")
