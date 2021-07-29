@@ -29,8 +29,7 @@ def get_java_version():
     version = -1
 
     try:
-        if output[0].startswith("java"):
-            # java
+        if '"' in output[0]:
             version = output[0].split('"')[1].split("_")[0]
         elif output[0].startswith("openjdk"):
             # openjdk
