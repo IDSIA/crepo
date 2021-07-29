@@ -36,7 +36,7 @@ public class GenQueries {
 
 		ArrayList<String> fail = new ArrayList<>();
 
-		String prj_folder = ".";
+		String prj_folder = "../../";
 		String modelFolder = prj_folder+"/networks/vmodel/";
 		String queryFolder = prj_folder+"/queries/";
 
