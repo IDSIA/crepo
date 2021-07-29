@@ -13,13 +13,47 @@ import pandas as pd
 class metainfo:
     local_jar = None
     local_df = None
+    java_bin = "java"
 
     def reset(self):
         self.local_jar = None
         self.local_df = None
+        self.java_bin = "java"
 
 info = metainfo()
 
+
+def get_java_version():
+    cmd = f"{info.java_bin} -version"
+    output = exec_bash(cmd, parse_error=True)
+    version = -1
+
+    try:
+        if output[0].startswith("java"):
+            # java
+            version = output[0].split('"')[1].split("_")[0]
+        elif output[0].startswith("openjdk"):
+            # openjdk
+            version = output[0].split(" ")[1]
+    except:
+        pass
+
+
+
+    return version
+
+
+def check_java():
+    version_str = get_java_version()
+    version = [int(v) for v in version_str.split(".")]
+    if version[0]<2 and version[1]<12:
+        print(f"warning: Crepo is accessing to an old java version ({version_str}), "
+              f"you are advised to set the path to a newer one.")
+
+
+
+
+######
 def download_metadata():
     info.reset()
     get_benchmark_data()
@@ -105,7 +139,7 @@ def run_crema(filename: str, target: int = 0, observed: str = "1", method: str =
     cmd += f" --timeout={timeout} {filename}"
     cmd += f" --log={logfile}" if logfile is not None else ""
     print(cmd)
-    cmd = f"java -cp {info.local_jar} {javafile} {cmd}"
+    cmd = f"{info.java_bin} -cp {info.local_jar} {javafile} {cmd}"
     output = exec_bash(cmd)
     exec(output[-1])
     return locals()["results"]

@@ -3,6 +3,8 @@ import crepobenchmark as crb
 # Download the inference results
 data = crb.get_benchmark_data()
 
+crb.info.java_bin = "/Library/Java/JavaVirtualMachines/openjdk-12.0.1.jdk/Contents/Home/bin/java"
+
 # Get a description of the data
 crb.describe()
 

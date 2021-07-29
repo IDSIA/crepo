@@ -31,18 +31,29 @@ def singleton(class_):
 
 
 
-def gen_exec(cmd, check_return: bool = False):
-    popen = subprocess.Popen(cmd, stdout=subprocess.PIPE, universal_newlines=True)
+def gen_exec(cmd, check_return: bool = False, parse_error = False):
+
+    args = dict(stdout=subprocess.PIPE, universal_newlines=True)
+
+    if parse_error:
+      args["stderr"] = subprocess.PIPE
+
+    popen = subprocess.Popen(cmd, **args)
     for stdout_line in iter(popen.stdout.readline, ""):
         yield stdout_line
+
+    if parse_error:
+        for stderr_line in iter(popen.stderr.readline, ""):
+            yield stderr_line
+
     popen.stdout.close()
     return_code = popen.wait()
     if return_code and check_return:
         raise subprocess.CalledProcessError(return_code, cmd)
 
 
-def exec_bash(cmd: str, check_return: bool = False):
-    return [s for s in gen_exec(cmd.split(), check_return)]
+def exec_bash(cmd: str, check_return: bool = False, parse_error : bool = False):
+    return [s for s in gen_exec(cmd.split(), check_return, parse_error)]
 
 
 def exec_bash_print(cmd: str, check_return: bool = False):
@@ -58,3 +69,6 @@ def write_file(path, content, binary:bool = False):
     flags = "wb+" if binary else "w+"
     with open(Path(path).absolute(), flags) as f:
         f.write(content)
+
+
+

@@ -22,6 +22,13 @@ Import the package.
 import crepobenchmark as crb
 ```
 
+If you need to change the java binary used, the command
+
+```
+crb.info.java_bin = "/jdkpath/bin/java"
+```
+will make crepo use the java binary at `/jdkpath/bin/` instead of the default one.
+
 ## Benchmarking data
 The following function will plot a table summarizing the features of the benchmarking dataset.
 
